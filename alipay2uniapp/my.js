@@ -1,4 +1,5 @@
 import PROMISE from '../node_modules/oneutil/PROMISE'
+// import TheKit from './tools/TheKit'
 export default class my {
 
   //////////////////////  基础  ///////////////////////////
@@ -50,19 +51,20 @@ export default class my {
           const ali_res = {
             SDKVersion : res.SDKVersion
           }
-
           SUCCESS(ali_res)
         }
-      } )
-    },uni_success, uni_fail, uni_complete)
+      })
+    },uni_success, uni_fail, uni_complete)  
 
-    
   }
   
   //////////////////////  应用级事件  ///////////////////////////
 
-  static env() {
-		return console.error("env暂不支持")
+  static get env() {
+		const res = {
+      USER_DATA_PATH: 'https://usr'
+    }
+    return res
   }
 
   static offAppHide(callback) {
