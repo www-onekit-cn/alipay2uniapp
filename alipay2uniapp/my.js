@@ -68,11 +68,11 @@ export default class my {
   }
 
   static offAppHide(callback) {
-		return uni.offError(callback)
+		return uni.offAppHide(callback)
   }
   
   static offAppShow(callback) {
-		return uni.offError(callback)
+		return uni.offAppShow(callback)
   }
   
   static offComponentError(callback) {
@@ -92,7 +92,13 @@ export default class my {
   }
   
   static onAppShow(callback) {
-		return uni.onAppShow(callback)
+		uni.onAppShow(res => {
+      const resu = {
+        query: res.query,
+        scene: res.scene
+      }
+      callback(resu)
+    })
   }
   
   static onComponentError(callback) {
