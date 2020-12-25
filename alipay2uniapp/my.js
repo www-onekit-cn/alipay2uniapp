@@ -1,3 +1,4 @@
+import PROMISE from '../node_modules/oneutil/PROMISE'
 export default class my {
 
   //////////////////////  基础  ///////////////////////////
@@ -16,11 +17,27 @@ export default class my {
   }
   
   static getLaunchOptionsSync() {
-		return console.error("getLaunchOptionsSync暂不支持")
+		return console.error("TO DO ... WANGYEWEI")
   }
   
-  static getRunScene() {
-		return console.error("getRunScene暂不支持")
+  static getRunScene(ali_object) {
+    const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+
+    PROMISE((SUUCCESS) =>{
+      const uni_accountInfo = uni.getAccountInfoSync()
+
+      const res = {
+        envVersion: uni_accountInfo.miniProgram.envVersion
+      }
+
+      SUUCCESS(res)
+
+    },uni_success, uni_fail, uni_complete)
+
+	
   }
   
   static SDKVersion() {
