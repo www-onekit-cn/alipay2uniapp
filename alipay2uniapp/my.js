@@ -7,7 +7,12 @@ export default class my {
   }
   
   static getAppIdSync() {
-		return console.error("getAppIdSync暂不支持")
+    const uni_accountInfo = uni.getAccountInfoSync()
+    const uni_appID = uni_accountInfo.miniProgram.appId
+    const uni_res = {
+      appId: uni_appID
+    }
+    return uni_res
   }
   
   static getLaunchOptionsSync() {
