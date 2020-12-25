@@ -26,22 +26,37 @@ export default class my {
     const uni_complete = ali_object.complete
     ali_object = null
 
-    PROMISE((SUUCCESS) =>{
+    PROMISE((SUCCESS) =>{
       const uni_accountInfo = uni.getAccountInfoSync()
 
       const res = {
         envVersion: uni_accountInfo.miniProgram.envVersion
       }
 
-      SUUCCESS(res)
-
+      SUCCESS(res)
     },uni_success, uni_fail, uni_complete)
 
-	
   }
   
-  static SDKVersion() {
-		return console.error("SDKVersion暂不支持")
+  static SDKVersion(ali_object) {
+    const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+
+    PROMISE((SUCCESS) =>{
+      uni.getSystemInfo({
+        success: res => {
+          const ali_res = {
+            SDKVersion : res.SDKVersion
+          }
+
+          SUCCESS(ali_res)
+        }
+      } )
+    },uni_success, uni_fail, uni_complete)
+
+    
   }
   
   //////////////////////  应用级事件  ///////////////////////////
