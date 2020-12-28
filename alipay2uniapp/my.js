@@ -132,13 +132,13 @@ export default class my {
     const uni_complete = ali_object.complete
     ali_object = null
 
-    const ali_res1 = {
-      title : uni_title
-    }
-    const ali_res2 = {
-      backgroundColor : uni_backgroundColor
-    }
     PROMISE((SUCCESS) =>{ 
+      const ali_res1 = {
+        title : uni_title
+      }
+      const ali_res2 = {
+        backgroundColor : uni_backgroundColor
+      }
       uni.setNavigationBarTitle(ali_res1)
       uni.setNavigationBarColor(ali_res2)
       SUCCESS(ali_res1)
@@ -159,59 +159,66 @@ export default class my {
   
   /////// tabBar /////
   static hideTabBar(ali_object) {
-    const uni_animation = ali_object.animation
+    return uni.hideTabBar(ali_object)
+  }
+  
+  static hideTabBarRedDot(ali_object) {
+    return uni.hideTabBarRedDot(ali_object)
+  }
+  
+  static removeTabBarBadge(ali_object) {
+    return uni.removeTabBarBadge(ali_object)
+  }
+  
+  static setTabBarBadge(ali_object) {
+    return uni.setTabBarBadge(ali_object)		
+  }
+  
+  static setTabBarItem(ali_object) {
+   return uni.setTabBarItem(ali_object)		
+  }
+  
+  static setTabBarStyle(ali_object) {
+		const uni_color = ali_object.color
+    const uni_selectedColor = ali_object.selectedColor
+    const uni_backgroundColor = ali_object.backgroundColor
+    const uni_borderStyle = ali_object.borderStyle
     const uni_success = ali_object.success
     const uni_fail = ali_object.fail
     const uni_complete = ali_object.complete
     ali_object = null
-    PROMISE((SUCCESS)=>{
+    PROMISE((SUCCESS) => {
       const ali_res = {
-        animation : uni_animation
+        color: uni_color,
+        selectedColor: uni_selectedColor,
+        backgroundColor: uni_backgroundColor,
+        borderStyle: uni_borderStyle,
+        backgroundImage: "",
+        backgroundRepeat: "no-repeat"
       }
-      uni.hideTabBar(ali_res)
+      uni.setTabBarStyle(ali_res)
       SUCCESS(ali_res)
     },uni_success,uni_fail,uni_complete)
-		
-  }
-  
-  static hideTabBarRedDot(object) {
-		return uni.hideTabBarRedDot(object)
-  }
-  
-  static removeTabBarBadge(object) {
-		return uni.removeTabBarBadge(object)
-  }
-  
-  static setTabBarBadge(object) {
-		return uni.setTabBarBadge(object)
-  }
-  
-  static setTabBarItem(object) {
-		return uni.setTabBarItem(object)
-  }
-  
-  static setTabBarStyle(object) {
-		return uni.setTabBarStyle(object)
   }
   
   static showTabBar(ali_object) {
-    const uni_animation = ali_object.animation
+   return uni.showTabBar(ali_object)
+  }
+  
+	static showTabBarRedDot(ali_object) {
+    const uni_index = ali_object.index
     const uni_success = ali_object.success
     const uni_fail = ali_object.fail
     const uni_complete = ali_object.complete
     ali_object = null
-    PROMISE((SUCCESS)=>{
+    PROMISE((SUCCESS) => {
       const ali_res = {
-        animation : uni_animation
+        index: uni_index
       }
-      uni.showTabBar(ali_res)
+      uni.showTabBarRedDot(ali_res)
       SUCCESS(ali_res)
     },uni_success,uni_fail,uni_complete)
-		
-  }
-  
-	static showTabBarRedDot(object) {
-		return uni.showTabBarRedDot(object)
+	
   }
   
   ////////  路由  /////////
