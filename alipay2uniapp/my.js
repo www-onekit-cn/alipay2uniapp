@@ -141,7 +141,8 @@ export default class my {
     PROMISE((SUCCESS) =>{ 
       uni.setNavigationBarTitle(ali_res1)
       uni.setNavigationBarColor(ali_res2)
-      SUCCESS(ali_res)
+      SUCCESS(ali_res1)
+      SUCCESS(ali_res2)
       
     },uni_success, uni_fail, uni_complete)  
 		
@@ -157,8 +158,20 @@ export default class my {
   }
   
   /////// tabBar /////
-  static hideTabBar(object) {
-		return uni.hideTabBar(object)
+  static hideTabBar(ali_object) {
+    const uni_animation = ali_object.animation
+    const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS)=>{
+      const ali_res = {
+        animation : uni_animation
+      }
+      uni.hideTabBar(ali_res)
+      SUCCESS(ali_res)
+    },uni_success,uni_fail,uni_complete)
+		
   }
   
   static hideTabBarRedDot(object) {
@@ -181,8 +194,20 @@ export default class my {
 		return uni.setTabBarStyle(object)
   }
   
-  static showTabBar(object) {
-		return uni.showTabBar(object)
+  static showTabBar(ali_object) {
+    const uni_animation = ali_object.animation
+    const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS)=>{
+      const ali_res = {
+        animation : uni_animation
+      }
+      uni.showTabBar(ali_res)
+      SUCCESS(ali_res)
+    },uni_success,uni_fail,uni_complete)
+		
   }
   
 	static showTabBarRedDot(object) {
