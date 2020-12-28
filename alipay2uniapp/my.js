@@ -239,7 +239,9 @@ export default class my {
         content: uni_content,
         confirmText: uni_confirmText,
         showCancel: true,
-        cancelText: "取消"
+        cancelText: "取消",
+        cancelColor: "#000000",
+        confirmColor: "#007aff"
       }
       uni.showModal(uni_object)
       const ali_res = {
@@ -249,8 +251,31 @@ export default class my {
     },uni_success,uni_fail,uni_complete)
   }
 
-  static confirm(object) {
-		return console.error("confirm暂不支持")
+  static confirm(ali_object) {
+    const uni_title = ali_object.title
+    const uni_content = ali_object.content
+    const uni_confirmText = ali_object.confirmButtonText
+    const uni_cancelText = ali_object.cancelButtonText
+		const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) => {
+      const uni_object = {
+        title: uni_title,
+        content: uni_content,
+        confirmText: uni_confirmText,
+        showCancel: true,
+        cancelText: uni_cancelText,
+        cancelColor: "#000000",
+        confirmColor: "#007aff"
+      }
+      const uni_res = uni.showModal(uni_object)
+      const ali_res = {
+        confirm: uni_res.confirm
+      }
+      SUCCESS(ali_res)
+    },uni_success,uni_fail,uni_complete)
   }
 
   static hideLoading(object) {
