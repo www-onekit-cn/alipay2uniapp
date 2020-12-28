@@ -3,11 +3,6 @@
   :class="['onekit-lottie',onekitClass]"
   :style="onekitStyle"
   :id="onekitId"
-
-  :adpid="unitId"
-
-  @load="adCustom_load"
-  @error="adCustom_error"
   >
     <slot></slot>
   </view>
@@ -20,22 +15,8 @@
     name: "onekit-lottie",
     mixins: [alipay_behavior, onekit_behavior],
     props: {
-      "unit-id": {
-        type: String,
-        defaul: ""
-      },
-      "ad-intervals": {//做不了
-        type: Number,
-        defaul: null
-      },
     },
     methods: {
-      adCustom_load(e){
-		  	this.$emit('load',e)
-      }, 
-      adCustom_error(e){
-		  	this.$emit('error',e)
-      }, 
     }
   }
 </script>
