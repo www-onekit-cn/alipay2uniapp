@@ -47,9 +47,9 @@ export default class my {
 
     PROMISE((SUCCESS) =>{
       uni.getSystemInfo({
-        success: res => {
+        success: uni_res => {
           const ali_res = {
-            SDKVersion : res.SDKVersion
+            SDKVersion : uni_res.SDKVersion
           }
           SUCCESS(ali_res)
         }
@@ -116,25 +116,44 @@ export default class my {
   //////////////////////  界面  ///////////////////////////
 
   /////// 导航栏 /////
-  static getTitleColor() {
+  static getTitleColor(ali_object) {
 		return console.error("getTitleColor暂不支持")
   }
 
   static hideBackHome() {
-		return console.error("hideBackHome暂不支持")
+		return uni.hideHomeButton();
   }
 
-  static setNavigationBar(object) {
-		return console.error("setNavigationBar暂不支持")
+  static setNavigationBar(ali_object) {
+    const uni_title = ali_object.title
+    const uni_backgroundColor = ali_object.backgroundColor
+    const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+
+    const ali_res1 = {
+      title : uni_title
+    }
+    const ali_res2 = {
+      backgroundColor : uni_backgroundColor
+    }
+    PROMISE((SUCCESS) =>{ 
+      uni.setNavigationBarTitle(ali_res1)
+      uni.setNavigationBarColor(ali_res2)
+      SUCCESS(ali_res)
+      
+    },uni_success, uni_fail, uni_complete)  
+		
   }
 
-  static hideNavigationBarLoading(object) {
-		return uni.hideNavigationBarLoading(object)
+  static hideNavigationBarLoading() {
+		return uni.hideNavigationBarLoading()
 	}
 
 
-  static showNavigationBarLoading(object) {
-		return uni.showNavigationBarLoading(object)
+  static showNavigationBarLoading() {
+		return uni.showNavigationBarLoading()
   }
   
   /////// tabBar /////
