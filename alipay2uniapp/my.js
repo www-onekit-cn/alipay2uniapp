@@ -179,26 +179,7 @@ export default class my {
   }
   
   static setTabBarStyle(ali_object) {
-		const uni_color = ali_object.color
-    const uni_selectedColor = ali_object.selectedColor
-    const uni_backgroundColor = ali_object.backgroundColor
-    const uni_borderStyle = ali_object.borderStyle
-    const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
-    ali_object = null
-    PROMISE((SUCCESS) => {
-      const ali_res = {
-        color: uni_color,
-        selectedColor: uni_selectedColor,
-        backgroundColor: uni_backgroundColor,
-        borderStyle: uni_borderStyle,
-        backgroundImage: "",
-        backgroundRepeat: "no-repeat"
-      }
-      uni.setTabBarStyle(ali_res)
-      SUCCESS(ali_res)
-    },uni_success,uni_fail,uni_complete)
+		return uni.setTabBarStyle(ali_object)
   }
   
   static showTabBar(ali_object) {
@@ -223,29 +204,49 @@ export default class my {
   
   ////////  路由  /////////
 
-	static switchTab(object) {
-		return uni.switchTab(object)
+	static switchTab(ali_object) {
+		return uni.switchTab(ali_object)
 	}
 
-	static reLaunch(object) {
+	static reLaunch(ali_object) {
 		return uni.reLaunch(object)
 	}
 
-	static redirectTo(object) {
-		return uni.redirectTo(object)
+	static redirectTo(ali_object) {
+		return uni.redirectTo(ali_object)
 	}
 
-	static navigateTo(object) {
-		return uni.navigateTo(object)
+	static navigateTo(ali_object) {
+   return uni.navigateTo(ali_object)
 	}
 
-	static navigateBack(object) {
-		return uni.navigateBack(object)
+	static navigateBack(ali_object) {
+		return uni.navigateBack(ali_object)
   }
   
   ////////  交互反馈  /////////
-  static alert(object) {
-		return console.error("alert暂不支持")
+  static alert(ali_object) {
+    const uni_title = ali_object.title
+    const uni_content = ali_object.content
+    const uni_confirmText = ali_object.buttonText
+		const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    
+    PROMISE((SUCCESS) => {
+      const uni_object = {
+        title: uni_title,
+        content: uni_content,
+        confirmText: uni_confirmText,
+        showCancel: true,
+        cancelText: "取消"
+      }
+      uni.showModal(uni_object)
+      const ali_res = {
+
+      }
+      SUCCESS(ali_res)
+    },uni_success,uni_fail,uni_complete)
   }
 
   static confirm(object) {
