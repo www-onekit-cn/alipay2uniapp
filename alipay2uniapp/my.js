@@ -1,4 +1,6 @@
 import PROMISE from '../node_modules/oneutil/PROMISE'
+import TASK from '../node_modules/oneutil/TASK'
+
 // import TheKit from './tools/TheKit'
 export default class my {
 
@@ -9,9 +11,9 @@ export default class my {
   }
   
   static getAppIdSync() {
-    const uni_accountInfo = uni.getAccountInfoSync()
-    const uni_appID = uni_accountInfo.miniProgram.appId
-    const uni_res = {
+    const ali_accountInfo = uni.getAccountInfoSync()
+    const ali_appID = ali_accountInfo.miniProgram.appId
+    const ali_res = {
       appId: uni_appID
     }
     return uni_res
@@ -22,13 +24,13 @@ export default class my {
   }
   
   static getRunScene(ali_object) {
-    const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
 
     PROMISE((SUCCESS) =>{
-      const uni_accountInfo = uni.getAccountInfoSync()
+      const ali_accountInfo = uni.getAccountInfoSync()
 
       const res = {
         envVersion: uni_accountInfo.miniProgram.envVersion
@@ -40,9 +42,9 @@ export default class my {
   }
   
   static SDKVersion(ali_object) {
-    const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
 
     PROMISE((SUCCESS) =>{
@@ -125,11 +127,11 @@ export default class my {
   }
 
   static setNavigationBar(ali_object) {
-    const uni_title = ali_object.title
-    const uni_backgroundColor = ali_object.backgroundColor
-    const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_title = ali_object.title
+    const ali_backgroundColor = ali_object.backgroundColor
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
 
     PROMISE((SUCCESS) =>{ 
@@ -187,10 +189,10 @@ export default class my {
   }
   
 	static showTabBarRedDot(ali_object) {
-    const uni_index = ali_object.index
-    const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_index = ali_object.index
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
       const ali_res = {
@@ -198,7 +200,7 @@ export default class my {
       }
       uni.showTabBarRedDot(ali_res)
       SUCCESS(ali_res)
-    },uni_success,uni_fail,uni_complete)
+    },ali_success,ali_fail,ali_complete)
 	
   }
   
@@ -226,15 +228,15 @@ export default class my {
   
   ////////  交互反馈  /////////
   static alert(ali_object) {
-    const uni_title = ali_object.title
-    const uni_content = ali_object.content
-    const uni_confirmText = ali_object.buttonText
-		const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_title = ali_object.title
+    const ali_content = ali_object.content
+    const ali_confirmText = ali_object.buttonText
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     
     PROMISE((SUCCESS) => {
-      const uni_object = {
+      const ali_object = {
         title: uni_title,
         content: uni_content,
         confirmText: uni_confirmText,
@@ -248,23 +250,23 @@ export default class my {
 
       }
       SUCCESS(ali_res)
-    },uni_success,uni_fail,uni_complete)
+    },ali_success,ali_fail,ali_complete)
   }
 
   static confirm(ali_object) {
-    const uni_title = ali_object.title
-    const uni_content = ali_object.content
-    const uni_confirmText = ali_object.confirmButtonText
-    const uni_cancelText = ali_object.cancelButtonText
-    const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_title = ali_object.title
+    const ali_content = ali_object.content
+    const ali_confirmText = ali_object.confirmButtonText
+    const ali_cancelText = ali_object.cancelButtonText
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
-      const title = uni_title
-      const content = uni_content
-      const confirmText = uni_confirmText
-      const cancelText = uni_cancelText
+      const title = ali_title
+      const content = ali_content
+      const confirmText = ali_confirmText
+      const cancelText = ali_cancelText
       uni.showModal({
         title,
         content,
@@ -284,40 +286,40 @@ export default class my {
           }
         }
       })
-    }, uni_success,uni_fail,uni_complete)
+    }, ali_success,ali_fail,ali_complete)
   }
 
   static hideLoading(ali_object) {
-    const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
       uni.hideLoading({
         success: () =>{
-          const uni_res ={
+          const ali_res ={
             success: true
           }
-          SUCCESS(uni_res)
+          SUCCESS(ali_res)
         }
       })
-    },uni_success,uni_fail,uni_complete)
+    },ali_success,ali_fail,ali_complete)
 		
   }
   
   static hideToast(ali_object) {
-    const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object =null
     PROMISE((SUCCESS) =>{
       uni.hideToast({
         success:() =>{
-          const uni_res = {}
-          SUCCESS(uni_res)
+          const ali_res = {}
+          SUCCESS(ali_res)
         }
       })
-    },uni_success,uni_fail,uni_complete)
+    },ali_success,ali_fail,ali_complete)
 		
   }
 
@@ -326,89 +328,89 @@ export default class my {
   }
   
   static showActionSheet(ali_object) {
-    const uni_itemList = ali_object.items
-    const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_itemList = ali_object.items
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) =>{
-      const itemList = uni_itemList
+      const itemList = ali_itemList
       uni.showActionSheet({
         itemList,
         success: res =>{
-          const uni_res ={
+          const ali_res ={
             index: res.tapIndex,
             success: true
           }
-          SUCCESS(uni_res)
+          SUCCESS(ali_res)
         }
       })
 
-    },uni_success,uni_fail,uni_complete)
+    },ali_success,ali_fail,ali_complete)
   }
   
   static showLoading(ali_object) {
-    const uni_title = ali_object.content
-    const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_title = ali_object.content
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
-      const title = uni_title
+      const title = ali_title
       uni.showLoading({
         title,
         success: () =>{
-          const uni_res ={
+          const ali_res ={
             success: true
           }
-          SUCCESS(uni_res)
+          SUCCESS(ali_res)
         }
       })
      
-    },uni_success,uni_fail,uni_complete)
+    },ali_success,ali_fail,ali_complete)
 	}
 
   static showToast(ali_object) {
-    const uni_title = ali_object.content
-    const uni_duration = ali_object.duration
-    const uni_icon = ali_object.type
-    const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_title = ali_object.content
+    const ali_duration = ali_object.duration
+    const ali_icon = ali_object.type
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) =>{
-      const title = uni_title
-      const duration = uni_duration
-      const icon = uni_icon
+      const title = ali_title
+      const duration = ali_duration
+      const icon = ali_icon
       uni.showToast({
         title,
         duration,
         icon,
         success: () =>{
-          const uni_res = {}
-          SUCCESS(uni_res)
+          const ali_res = {}
+          SUCCESS(ali_res)
         }
       })
 
-    },uni_success,uni_fail,uni_complete)
+    },ali_success,ali_fail,ali_complete)
   }
   
   ////////  下拉刷新  /////////
   static startPullDownRefresh(ali_object) {
-		const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
       uni.hideLoading({
         success: () =>{
-          const uni_res ={
+          const ali_res ={
             success: true
           }
-          SUCCESS(uni_res)
+          SUCCESS(ali_res)
         }
       })
-    },uni_success,uni_fail,uni_complete)
+    },ali_success,ali_fail,ali_complete)
   }
   
   static stopPullDownRefresh(ali_object) {
@@ -487,29 +489,29 @@ export default class my {
 
   ////////  滚动  /////////
   static pageScrollTo(ali_object) {
-    const uni_scrollTop = ali_object.scrollTop
-    const uni_duration = ali_object.duration
-    const uni_selector = ali_object.selector
-		const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_scrollTop = ali_object.scrollTop
+    const ali_duration = ali_object.duration
+    const ali_selector = ali_object.selector
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
-      const scrollTop = uni_scrollTop
-      const duration = uni_duration
-      const selector = uni_selector
+      const scrollTop = ali_scrollTop
+      const duration = ali_duration
+      const selector = ali_selector
       uni.pageScrollTo({
         scrollTop,
         duration,
         selector,
         success: () =>{
-          const uni_res ={
+          const ali_res ={
             success: true
           }
-          SUCCESS(uni_res)
+          SUCCESS(ali_res)
         }
       })
-    },uni_success,uni_fail,uni_complete)
+    },ali_success,ali_fail,ali_complete)
   }
 
   ////////  节点查询  /////////
@@ -533,29 +535,29 @@ export default class my {
 
   ////////  设置窗口背景  /////////
   static setBackgroundColor(ali_object) {
-    const uni_backgroundColor = ali_object.backgroundColor
-    const uni_backgroundColorTop = ali_object.backgroundColorTop
-    const uni_backgroundColorBottom = ali_object.backgroundColorBottom
-		const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_backgroundColor = ali_object.backgroundColor
+    const ali_backgroundColorTop = ali_object.backgroundColorTop
+    const ali_backgroundColorBottom = ali_object.backgroundColorBottom
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
-      const backgroundColor = uni_backgroundColor
-      const backgroundColorTop = uni_backgroundColorTop
-      const backgroundColorBottom = uni_backgroundColorBottom
+      const backgroundColor = ali_backgroundColor
+      const backgroundColorTop = ali_backgroundColorTop
+      const backgroundColorBottom = ali_backgroundColorBottom
       uni.setBackgroundColor({
         backgroundColor,
         backgroundColorTop,
         backgroundColorBottom,
         success: () =>{
-          const uni_res ={
+          const ali_res ={
             success: true
           }
-          SUCCESS(uni_res)
+          SUCCESS(ali_res)
         }
       })
-    },uni_success,uni_fail,uni_complete)
+    },ali_success,ali_fail,ali_complete)
   }
 
   static setBackgroundTextStyle(ali_object) {
@@ -576,31 +578,56 @@ export default class my {
 
   ////////  图片  /////////
   static chooseImage(ali_object) {
-    const uni_count = ali_object.count
-    const uni_sizeType = ali_object.sizeType
-    const uni_sourceType = ali_object.sourceType
-		const uni_success = ali_object.success
-    const uni_fail = ali_object.fail
-    const uni_complete = ali_object.complete
+    const ali_count = ali_object.count
+    const ali_sizeType = ali_object.sizeType
+    const ali_sourceType = ali_object.sourceType
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
-      const count = uni_count
-      const sizeType = uni_sizeType
-      const sourceType = uni_sourceType
+      const count = ali_count
+      const sizeType = ali_sizeType
+      const sourceType = ali_sourceType
       uni.chooseImage({
         count,
         sizeType,
         sourceType,
         success: (res) =>{
-          const uni_res ={
+          const ali_res ={
             success: true,
             tempFilePaths: res.tempFilePaths,
             apFilePaths: res.tempFiles
           }
-          SUCCESS(uni_res)
+          SUCCESS(ali_res)
         }
       })
-    },uni_success,uni_fail,uni_complete)
+    },ali_success,ali_fail,ali_complete)
+  }
+
+  static compressImage(ali_object) {
+    const ali_apFilePaths = ali_object.apFilePaths
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) => {
+      TASK(ali_apFilePaths, (ali_apFilePath,callback)=>{
+        const uni_src = ali_apFilePath
+        uni.compressImage({
+          src:uni_src,
+          success: (res) =>{
+            const apFilePath = res.tempFilePath
+            callback(apFilePath)
+          }
+        })
+      }, (apFilePaths)=>{
+        const ali_res ={
+          apFilePaths
+        }
+        SUCCESS(ali_res)
+      })
+    },ali_success,ali_fail,ali_complete)
   }
 
 
