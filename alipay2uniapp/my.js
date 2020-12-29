@@ -594,10 +594,9 @@ export default class my {
         sizeType,
         sourceType,
         success: (res) =>{
-          const ali_res ={
-            success: true,
-            tempFilePaths: res.tempFilePaths,
-            apFilePaths: res.tempFiles
+          const ali_res = {
+            tempFiles: res.tempFiles,
+            apFilePaths: res.tempFilePaths
           }
           SUCCESS(ali_res)
         }
@@ -607,15 +606,24 @@ export default class my {
 
   static compressImage(ali_object) {
     const ali_apFilePaths = ali_object.apFilePaths
+    const ali_compressLevel = ali_object.compressLevel || 4
 		const ali_success = ali_object.success
     const ali_fail = ali_object.fail
     const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
+      let uni_quality
+      if(ali_compressLevel){
+        uni_quality = 80
+      }else{
+        uni_quality = (ali_compressLevel+1)*25
+      }
+    
       TASK(ali_apFilePaths, (ali_apFilePath,callback)=>{
         const uni_src = ali_apFilePath
         uni.compressImage({
           src:uni_src,
+          quality:uni_quality,
           success: (res) =>{
             const apFilePath = res.tempFilePath
             callback(apFilePath)
