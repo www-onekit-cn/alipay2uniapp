@@ -256,50 +256,141 @@ export default class my {
     const uni_content = ali_object.content
     const uni_confirmText = ali_object.confirmButtonText
     const uni_cancelText = ali_object.cancelButtonText
-		const uni_success = ali_object.success
+    const uni_success = ali_object.success
     const uni_fail = ali_object.fail
     const uni_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
-      const uni_object = {
-        title: uni_title,
-        content: uni_content,
-        confirmText: uni_confirmText,
-        showCancel: true,
-        cancelText: uni_cancelText,
-        cancelColor: "#000000",
-        confirmColor: "#007aff"
-      }
-      const uni_res = uni.showModal(uni_object)
-      const ali_res = {
-        confirm: uni_res.confirm
-      }
-      SUCCESS(ali_res)
-    },uni_success,uni_fail,uni_complete)
+      const title = uni_title
+      const content = uni_content
+      const confirmText = uni_confirmText
+      const cancelText = uni_cancelText
+      uni.showModal({
+        title,
+        content,
+        confirmText,
+        cancelText,
+        success: res => {
+          if(res.confirm) {
+            const res = {
+              confirm: true
+            }
+            SUCCESS(res)
+          } else if (res.cancel) {
+            const res = {
+              confirm: false
+            }
+            SUCCESS(res)
+          }
+        }
+      })
+    }, uni_success,uni_fail,uni_complete)
   }
 
-  static hideLoading(object) {
-		return uni.hideLoading(object)
+  static hideLoading(ali_object) {
+    const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) => {
+      uni.hideLoading({
+        success: () =>{
+          const uni_res ={
+            success: true
+          }
+          SUCCESS(uni_res)
+        }
+      })
+    },uni_success,uni_fail,uni_complete)
+		
   }
   
-  static hideToast(object) {
-		return uni.hideToast(object)
+  static hideToast(ali_object) {
+    const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object =null
+    PROMISE((SUCCESS) =>{
+      uni.hideToast({
+        success:() =>{
+          const uni_res = {}
+          SUCCESS(uni_res)
+        }
+      })
+    },uni_success,uni_fail,uni_complete)
+		
   }
 
-  static prompt(object) {
+  static prompt(ali_object) {
 		return console.error("prompt暂不支持")
   }
   
-  static showActionSheet(object) {
-		return uni.showActionSheet(object)
+  static showActionSheet(ali_object) {
+    const uni_itemList = ali_object.items
+    const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      const itemList = uni_itemList
+      uni.showActionSheet({
+        itemList,
+        success: res =>{
+          const uni_res ={
+            index: res.tapIndex,
+            success: true
+          }
+          SUCCESS(uni_res)
+        }
+      })
+
+    },uni_success,uni_fail,uni_complete)
   }
   
-  static showLoading(object) {
-		return uni.showLoading(object)
+  static showLoading(ali_object) {
+    const uni_title = ali_object.content
+    const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) => {
+      const title = uni_title
+      uni.showLoading({
+        title,
+        success: () =>{
+          const uni_res ={
+            success: true
+          }
+          SUCCESS(uni_res)
+        }
+      })
+     
+    },uni_success,uni_fail,uni_complete)
 	}
 
-  static showToast(object) {
-		return uni.showToast(object)
+  static showToast(ali_object) {
+    const uni_title = ali_object.content
+    const uni_duration = ali_object.duration
+    const uni_icon = ali_object.type
+    const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      const title = uni_title
+      const duration = uni_duration
+      const icon = uni_icon
+      uni.showToast({
+        title,
+        duration,
+        icon,
+        success: () =>{
+          const uni_res = {}
+          SUCCESS(uni_res)
+        }
+      })
+
+    },uni_success,uni_fail,uni_complete)
   }
   
   ////////  下拉刷新  /////////
