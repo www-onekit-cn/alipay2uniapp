@@ -558,6 +558,51 @@ export default class my {
     },uni_success,uni_fail,uni_complete)
   }
 
+  static setBackgroundTextStyle(ali_object) {
+    return uni.setBackgroundTextStyle(ali_object)
+  }
+
+  ////////  设置页面是否支持下拉  /////////
+  static setCanPullDown(ali_object) {
+    return coonsole.error("setCanPullDown暂不支持")
+  }
+
+  ////////  字体  /////////
+  static loadFontFace(ali_object) {
+    return uni.loadFontFace(ali_object)
+  }
+
+  //////////////////////  多媒体  ///////////////////////////
+
+  ////////  图片  /////////
+  static chooseImage(ali_object) {
+    const uni_count = ali_object.count
+    const uni_sizeType = ali_object.sizeType
+    const uni_sourceType = ali_object.sourceType
+		const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) => {
+      const count = uni_count
+      const sizeType = uni_sizeType
+      const sourceType = uni_sourceType
+      uni.chooseImage({
+        count,
+        sizeType,
+        sourceType,
+        success: (res) =>{
+          const uni_res ={
+            success: true,
+            tempFilePaths: res.tempFilePaths,
+            apFilePaths: res.tempFiles
+          }
+          SUCCESS(uni_res)
+        }
+      })
+    },uni_success,uni_fail,uni_complete)
+  }
+
 
 
 	
