@@ -209,7 +209,7 @@ export default class my {
 	}
 
 	static reLaunch(ali_object) {
-		return uni.reLaunch(object)
+		return uni.reLaunch(ali_object)
 	}
 
 	static redirectTo(ali_object) {
@@ -322,7 +322,7 @@ export default class my {
   }
 
   static prompt(ali_object) {
-		return console.error("prompt暂不支持")
+		return console.log("prompt暂不支持")
   }
   
   static showActionSheet(ali_object) {
@@ -394,12 +394,25 @@ export default class my {
   }
   
   ////////  下拉刷新  /////////
-  static startPullDownRefresh(object) {
-		return uni.startPullDownRefresh(object)
+  static startPullDownRefresh(ali_object) {
+		const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) => {
+      uni.hideLoading({
+        success: () =>{
+          const uni_res ={
+            success: true
+          }
+          SUCCESS(uni_res)
+        }
+      })
+    },uni_success,uni_fail,uni_complete)
   }
   
-  static stopPullDownRefresh(object) {
-		return uni.stopPullDownRefresh(object)
+  static stopPullDownRefresh(ali_object) {
+		return uni.stopPullDownRefresh(ali_object)
   }
   
   ////////  联系人  /////////
@@ -414,6 +427,138 @@ export default class my {
   static choosePhoneContact(object) {
 		return console.error("choosePhoneContact暂不支持")
   }
+
+  ////////  选择城市  /////////
+  static chooseCity(object) {
+		return console.error("chooseCity暂不支持")
+  }
+
+  static onLocatedComplete(object) {
+		return console.error("onLocatedComplete暂不支持")
+  }
+
+  static setLocatedCity(object) {
+		return console.error("setLocatedCity暂不支持")
+  }
+
+  static regionPicker(object) {
+		return console.error("regionPicker暂不支持")
+  }
+
+  ////////  选择日期  /////////
+  static datePicker(object) {
+		return console.error("datePicker暂不支持")
+  }
+
+  ////////  动画  /////////
+  static createAnimation(ali_object) {
+    const uni_res = uni.createAnimation(ali_object)
+    const ali_res = {
+      animations: uni_res.actions,
+      config: uni_res.option,
+      currentAnimation: uni_res.currentStepAnimates
+    }
+    return ali_res
+  }
+
+  ////////  画布  /////////
+  static createCanvasContext(canvasId) {
+		return uni.createCanvasContext(canvasId)
+  }
+
+  ////////  地图  /////////
+  static createMapContext(mapId) {
+		return uni.createMapContext(mapId)
+  }
+
+  static getMapInfo(object) {
+		return console.error("getMapInfo暂不支持")
+  }
+
+  ////////  计算路径  /////////
+  static calculateRoute(object) {
+		return console.error("calculateRoute暂不支持")
+  }
+
+  ////////  键盘  /////////
+  static calculateRoute() {
+		return uni.calculateRoute()
+  }
+
+  ////////  滚动  /////////
+  static pageScrollTo(ali_object) {
+    const uni_scrollTop = ali_object.scrollTop
+    const uni_duration = ali_object.duration
+    const uni_selector = ali_object.selector
+		const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) => {
+      const scrollTop = uni_scrollTop
+      const duration = uni_duration
+      const selector = uni_selector
+      uni.pageScrollTo({
+        scrollTop,
+        duration,
+        selector,
+        success: () =>{
+          const uni_res ={
+            success: true
+          }
+          SUCCESS(uni_res)
+        }
+      })
+    },uni_success,uni_fail,uni_complete)
+  }
+
+  ////////  节点查询  /////////
+  static createIntersectionObserver(ali_object) {
+   return uni.createIntersectionObserver(ali_object)
+  }
+
+  static createSelectorQuery() {
+    return uni.createSelectorQuery()
+  }
+
+  ////////  选项选择器  /////////
+  static optionsSelect(ali_object) {
+    return console.error("optionsSelect暂不支持")
+  }
+
+  ////////  级联选择  /////////
+  static optionsSelect(ali_object) {
+    return console.error("multiLevelSelect暂不支持")
+  }
+
+  ////////  设置窗口背景  /////////
+  static setBackgroundColor(ali_object) {
+    const uni_backgroundColor = ali_object.backgroundColor
+    const uni_backgroundColorTop = ali_object.backgroundColorTop
+    const uni_backgroundColorBottom = ali_object.backgroundColorBottom
+		const uni_success = ali_object.success
+    const uni_fail = ali_object.fail
+    const uni_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) => {
+      const backgroundColor = uni_backgroundColor
+      const backgroundColorTop = uni_backgroundColorTop
+      const backgroundColorBottom = uni_backgroundColorBottom
+      uni.setBackgroundColor({
+        backgroundColor,
+        backgroundColorTop,
+        backgroundColorBottom,
+        success: () =>{
+          const uni_res ={
+            success: true
+          }
+          SUCCESS(uni_res)
+        }
+      })
+    },uni_success,uni_fail,uni_complete)
+  }
+
+
 
 	
 
