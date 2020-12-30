@@ -535,13 +535,13 @@ export default class my {
     const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
-      const uni_count = ali_count
-      const uni_sizeType = ali_sizeType
-      const uni_sourceType = ali_sourceType
+      const count = ali_count
+      const sizeType = ali_sizeType
+      const sourceType = ali_sourceType
       uni.chooseImage({
-        uni_count,
-        uni_count,
-        uni_sourceType,
+        count,
+        sizeType,
+        sourceType,
         success: (res) =>{
           const ali_res = {
             tempFiles: res.tempFiles,
@@ -702,6 +702,63 @@ export default class my {
     const ali_data = ali_object.data
     ali_object = null
     return uni.setStorageSync(ali_key,ali_data)
+  }
+
+  //////////////////////  文件  ///////////////////////////
+
+  static getFileInfo(ali_object) {
+    return uni.getFileInfo(ali_object)
+  }
+
+  static saveFile(ali_object) {
+    const ali_apFilePath = ali_object.apFilePath
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      const tempFilePath = ali_apFilePath
+      uni.saveFile({
+        tempFilePath,
+        success: res =>{
+          const ali_res ={
+            apFilePath: res.savedFilePath
+          }
+          SUCCESS(ali_res)
+        }
+      })
+    },ali_success,ali_fail,ali_complete)
+    
+  }
+
+  static getSavedFileList(ali_object) {
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      uni.getSavedFileList({
+        success: uni_res =>{ 
+          ////////////////////////////////////////////
+          const ali_fileList = uni_res.fileList.map(file =>{ 
+            return {
+              size: file.size,
+              createTime: file.createTime,
+              apFilePath: file.filePath
+            }
+          })
+
+          ///////////////////////////////////////////
+
+          const ali_res = {
+            fileList: ali_fileList
+          }
+          SUCCESS(ali_res)
+        }
+      })
+      
+    },ali_success,ali_fail,ali_complete)
+    
   }
 
   
