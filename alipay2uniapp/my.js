@@ -12,11 +12,11 @@ export default class my {
   
   static getAppIdSync() {
     const ali_accountInfo = uni.getAccountInfoSync()
-    const ali_appID = ali_accountInfo.miniProgram.appId
+    const uni_appID = ali_accountInfo.miniProgram.appId
     const ali_res = {
       appId: uni_appID
     }
-    return uni_res
+    return ali_res
   }
   
   static getLaunchOptionsSync() {
@@ -30,14 +30,14 @@ export default class my {
     ali_object = null
 
     PROMISE((SUCCESS) =>{
-      const ali_accountInfo = uni.getAccountInfoSync()
+      const uni_accountInfo = uni.getAccountInfoSync()
 
-      const res = {
+      const ali_res = {
         envVersion: uni_accountInfo.miniProgram.envVersion
       }
 
-      SUCCESS(res)
-    },uni_success, uni_fail, uni_complete)
+      SUCCESS(ali_res)
+    },ali_success, ali_fail, ali_complete)
 
   }
   
@@ -56,17 +56,17 @@ export default class my {
           SUCCESS(ali_res)
         }
       })
-    },uni_success, uni_fail, uni_complete)  
+    },ali_success, ali_fail, ali_complete)  
 
   }
   
   //////////////////////  应用级事件  ///////////////////////////
 
   static get env() {
-		const res = {
+		const ali_res = {
       USER_DATA_PATH: 'https://usr'
     }
-    return res
+    return ali_res
   }
 
   static offAppHide(callback) {
@@ -94,12 +94,12 @@ export default class my {
   }
   
   static onAppShow(callback) {
-		uni.onAppShow(res => {
-      const resu = {
-        query: res.query,
-        scene: res.scene
+		uni.onAppShow(uni_res => {
+      const ali_res = {
+        query: uni_res.query,
+        scene: uni_res.scene
       }
-      callback(resu)
+      callback(ali_res)
     })
   }
   
@@ -136,17 +136,17 @@ export default class my {
 
     PROMISE((SUCCESS) =>{ 
       const ali_res1 = {
-        title : uni_title
+        title : ali_title
       }
       const ali_res2 = {
-        backgroundColor : uni_backgroundColor
+        backgroundColor : ali_backgroundColor
       }
       uni.setNavigationBarTitle(ali_res1)
       uni.setNavigationBarColor(ali_res2)
       SUCCESS(ali_res1)
       SUCCESS(ali_res2)
       
-    },uni_success, uni_fail, uni_complete)  
+    },ali_success, ali_fail, ali_complete)  
 		
   }
 
@@ -189,18 +189,7 @@ export default class my {
   }
   
 	static showTabBarRedDot(ali_object) {
-    const ali_index = ali_object.index
-    const ali_success = ali_object.success
-    const ali_fail = ali_object.fail
-    const ali_complete = ali_object.complete
-    ali_object = null
-    PROMISE((SUCCESS) => {
-      const ali_res = {
-        index: uni_index
-      }
-      uni.showTabBarRedDot(ali_res)
-      SUCCESS(ali_res)
-    },ali_success,ali_fail,ali_complete)
+    return uni.showTabBarRedDot(ali_object)
 	
   }
   
@@ -234,22 +223,21 @@ export default class my {
 		const ali_success = ali_object.success
     const ali_fail = ali_object.fail
     const ali_complete = ali_object.complete
-    
+    ali_object = null
     PROMISE((SUCCESS) => {
-      const ali_object = {
-        title: uni_title,
-        content: uni_content,
-        confirmText: uni_confirmText,
-        showCancel: true,
-        cancelText: "取消",
-        cancelColor: "#000000",
-        confirmColor: "#007aff"
-      }
-      uni.showModal(uni_object)
-      const ali_res = {
-
-      }
-      SUCCESS(ali_res)
+      const title = ali_title
+      const content = ali_content
+      const confirmText = ali_confirmText
+      uni.showModal({
+        title,
+        content,
+        confirmText,
+        success: () =>{
+          const ali_res = {
+          }
+          SUCCESS(ali_res)
+        }
+      })
     },ali_success,ali_fail,ali_complete)
   }
 
@@ -290,37 +278,11 @@ export default class my {
   }
 
   static hideLoading(ali_object) {
-    const ali_success = ali_object.success
-    const ali_fail = ali_object.fail
-    const ali_complete = ali_object.complete
-    ali_object = null
-    PROMISE((SUCCESS) => {
-      uni.hideLoading({
-        success: () =>{
-          const ali_res ={
-            success: true
-          }
-          SUCCESS(ali_res)
-        }
-      })
-    },ali_success,ali_fail,ali_complete)
-		
+    return uni.hideLoading(ali_object)		
   }
   
   static hideToast(ali_object) {
-    const ali_success = ali_object.success
-    const ali_fail = ali_object.fail
-    const ali_complete = ali_object.complete
-    ali_object =null
-    PROMISE((SUCCESS) =>{
-      uni.hideToast({
-        success:() =>{
-          const ali_res = {}
-          SUCCESS(ali_res)
-        }
-      })
-    },ali_success,ali_fail,ali_complete)
-		
+    return uni.hideToast(ali_object)	
   }
 
   static prompt(ali_object) {
@@ -328,13 +290,13 @@ export default class my {
   }
   
   static showActionSheet(ali_object) {
-    const ali_itemList = ali_object.items
+    const ali_items = ali_object.items
     const ali_success = ali_object.success
     const ali_fail = ali_object.fail
     const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) =>{
-      const itemList = ali_itemList
+      const itemList = ali_items
       uni.showActionSheet({
         itemList,
         success: res =>{
@@ -397,20 +359,7 @@ export default class my {
   
   ////////  下拉刷新  /////////
   static startPullDownRefresh(ali_object) {
-		const ali_success = ali_object.success
-    const ali_fail = ali_object.fail
-    const ali_complete = ali_object.complete
-    ali_object = null
-    PROMISE((SUCCESS) => {
-      uni.hideLoading({
-        success: () =>{
-          const ali_res ={
-            success: true
-          }
-          SUCCESS(ali_res)
-        }
-      })
-    },ali_success,ali_fail,ali_complete)
+		return uni.startPullDownRefresh(ali_object)
   }
   
   static stopPullDownRefresh(ali_object) {
@@ -586,13 +535,13 @@ export default class my {
     const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) => {
-      const count = ali_count
-      const sizeType = ali_sizeType
-      const sourceType = ali_sourceType
+      const uni_count = ali_count
+      const uni_sizeType = ali_sizeType
+      const uni_sourceType = ali_sourceType
       uni.chooseImage({
-        count,
-        sizeType,
-        sourceType,
+        uni_count,
+        uni_count,
+        uni_sourceType,
         success: (res) =>{
           const ali_res = {
             tempFiles: res.tempFiles,
@@ -622,8 +571,8 @@ export default class my {
       TASK(ali_apFilePaths, (ali_apFilePath,callback)=>{
         const uni_src = ali_apFilePath
         uni.compressImage({
-          src:uni_src,
-          quality:uni_quality,
+          src: uni_src,
+          quality: uni_quality,
           success: (res) =>{
             const apFilePath = res.tempFilePath
             callback(apFilePath)
@@ -637,6 +586,11 @@ export default class my {
       })
     },ali_success,ali_fail,ali_complete)
   }
+
+  static getImageInfo(ali_object) {
+    return uni.getImageInfo(ali_object)
+  }
+  
 
 
 
