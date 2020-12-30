@@ -590,6 +590,126 @@ export default class my {
   static getImageInfo(ali_object) {
     return uni.getImageInfo(ali_object)
   }
+
+  static previewImage(ali_object) {
+    return uni.previewImage(ali_object)
+  }
+
+  static saveImage(ali_object) {
+    const ali_url = ali_object.url
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS)=>{
+      const filpath = ali_url
+      uni.saveImageToPhotosAlbum({
+        filpath,
+        success:() =>{
+          const ali_res = {
+            succcess: true
+          }
+          SUCCESS(ali_res)
+        }
+      })
+    },ali_success,ali_fail,ali_complete)
+   
+  }
+
+  ////////  视频播放  /////////
+  static createVideoContext(videoId) {
+    return uni.createVideoContext(videoId)
+  }
+
+  ////////  音频播放  /////////
+  static createInnerAudioContext() {
+    return uni.createInnerAudioContext()
+  }
+
+  static getAvailableAudioSources(ali_object) {
+    return console.log("getAvailableAudioSources暂不支持")
+  }
+
+  static getBackgroundAudioManager() {
+    return uni.getBackgroundAudioManager()
+  }
+
+  static offAudioInterruptionBegin(ali_object) {
+    return console.log("offAudioInterruptionBegin暂不支持")
+  }
+
+  static offAudioInterruptionEnd(ali_object) {
+    return console.log("offAudioInterruptionEnd暂不支持")
+  }
+
+  static onAudioInterruptionBegin(ali_object) {
+    return console.log("onAudioInterruptionBegin暂不支持")
+  }
+
+  static onAudioInterruptionEnd(ali_object) {
+    return console.log("onAudioInterruptionEnd暂不支持")
+  }
+
+  //////////////////////  缓存  ///////////////////////////
+
+  static clearStorage() {
+    return uni.clearStorage()
+  }
+
+  static clearStorageSync() {
+    return uni.clearStorageSync()
+  }
+
+  static getStorage(ali_object) {
+    return uni.getStorage(ali_object)
+  }
+
+  static getStorageInfo(ali_object) {
+    return uni.getStorageInfo(ali_object)
+  }
+
+  static getStorageInfoSync() {
+    return uni.getStorageInfoSync()
+  }
+
+  static getStorageSync(ali_object) {
+    const ali_key = ali_object.key
+    ali_object = null
+    const uni_res = uni.getStorageSync(ali_key)
+    const ali_res = {
+      success: true,
+      data: uni_res
+    }
+    return ali_res
+  }
+
+  static removeStorage(ali_object) {
+    return uni.removeStorage(ali_object)
+  }
+
+  static removeStorageSync(ali_object) {
+    const ali_key = ali_object.key
+    ali_object = null
+    return uni.removeStorageSync(ali_key)
+  }
+
+  static setStorage(ali_object) {
+    return uni.setStorage(ali_object)
+  }
+
+  static setStorageSync(ali_object) {
+    const ali_key = ali_object.key
+    const ali_data = ali_object.data
+    ali_object = null
+    return uni.setStorageSync(ali_key,ali_data)
+  }
+
+  
+
+ 
+  
+
+  
   
 
 
