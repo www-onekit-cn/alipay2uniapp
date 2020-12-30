@@ -707,26 +707,49 @@ export default class my {
   //////////////////////  文件  ///////////////////////////
 
   static getFileInfo(ali_object) {
-    return uni.getFileInfo(ali_object)
+    const ali_apFilePath = ali_object.apFilePath
+    const ali_digestAlgorithm = ali_object.digestAlgorithm || "md5"
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      const filePath = ali_apFilePath
+      const digestAlgorithm = ali_digestAlgorithm
+      uni.getFileInfo({
+        filePath,
+        digestAlgorithm,
+        success: uni_res =>{
+          const ali_res ={
+            size: uni_res.size,
+            digest: uni_res.digest
+          }
+          SUCCESS(ali_res)
+        }
+      })
+    },ali_success,ali_fail,ali_complete)
+    
   }
 
-  static saveFile(ali_object) {
+  static getSavedFileInfo(ali_object) {
     const ali_apFilePath = ali_object.apFilePath
 		const ali_success = ali_object.success
     const ali_fail = ali_object.fail
     const ali_complete = ali_object.complete
     ali_object = null
     PROMISE((SUCCESS) =>{
-      const tempFilePath = ali_apFilePath
-      uni.saveFile({
-        tempFilePath,
-        success: res =>{
-          const ali_res ={
-            apFilePath: res.savedFilePath
+      const filePath = ali_apFilePath
+      uni.getSavedFileInfo({
+        filePath,
+        success: uni_res =>{ 
+          const ali_res = {
+            size: uni_res.size,
+            createTime: uni_res.createTime
           }
           SUCCESS(ali_res)
         }
       })
+      
     },ali_success,ali_fail,ali_complete)
     
   }
@@ -739,7 +762,6 @@ export default class my {
     PROMISE((SUCCESS) =>{
       uni.getSavedFileList({
         success: uni_res =>{ 
-          ////////////////////////////////////////////
           const ali_fileList = uni_res.fileList.map(file =>{ 
             return {
               size: file.size,
@@ -747,9 +769,6 @@ export default class my {
               apFilePath: file.filePath
             }
           })
-
-          ///////////////////////////////////////////
-
           const ali_res = {
             fileList: ali_fileList
           }
@@ -760,6 +779,119 @@ export default class my {
     },ali_success,ali_fail,ali_complete)
     
   }
+
+  static openDocument(ali_object) {
+     return uni.openDocument(ali_object)
+  }
+
+  static removeSavedFile(ali_object) {
+    const ali_apFilePath = ali_object.apFilePath
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    const filePath = ali_apFilePath
+    const success = ali_success
+    const fail = ali_fail
+    const complete = ali_complete
+    const uni_object = {
+      filePath,
+      success,
+      fail,
+      complete
+    }
+    return uni.removeSavedFile(uni_object)
+  }
+
+  static saveFile(ali_object) {
+    const ali_apFilePath = ali_object.apFilePath
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      const tempFilePath = ali_apFilePath
+      uni.saveFile({
+        tempFilePath,
+        success: uni_res =>{
+          const ali_res ={
+            apFilePath: uni_res.savedFilePath
+          }
+          SUCCESS(ali_res)
+        }
+      })
+    },ali_success,ali_fail,ali_complete)
+    
+  }
+
+  //////////////////////  位置  ///////////////////////////
+  static chooseLocation(ali_object) {
+		return uni.chooseLocation(ali_object) 
+  }
+
+  static getLocation(ali_object) {
+    const ali_type = ali_object.type || 0
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    let uni_type = null
+    if(ali_type == 0){
+      uni_type = "wgs84"
+    }else{
+      uni_type = "gcj02"
+    }
+    PROMISE((SUCCESS) =>{
+      const type = uni_type
+      uni.getLocation({
+        type,
+        success: uni_res =>{ 
+          const ali_res = {
+            longitude: uni_res.longitude,
+            latitude: uni_res.latitude,
+            accuracy: uni_res.accuracy,
+            horizontalAccuracy: uni_res.horizontalAccuracy,
+          }
+          SUCCESS(ali_res)
+        }
+      })
+      
+    },ali_success,ali_fail,ali_complete)
+    
+  }
+
+  static openLocation(ali_object) {
+    const ali_longitude = ali_object.longitude
+    const ali_latitude = ali_object.latitude
+    const ali_keyword = ali_object.name
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    const longitude = ali_longitude
+    const latitude = ali_latitude
+    const name = ali_keyword
+    const success = ali_success
+    const fail = ali_fail
+    const complete = ali_complete
+    const uni_object = {
+      longitude,
+      latitude,
+      name,
+      success,
+      fail,
+      complete
+    }
+
+		return uni.openLocation(uni_object) 
+  }
+
+  
+  
+
+  
+
+  
 
   
 
