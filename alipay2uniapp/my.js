@@ -886,51 +886,113 @@ export default class my {
 		return uni.openLocation(uni_object) 
   }
 
-  
-  
+  //////////////////////  网络  ///////////////////////////
 
-  
+  ////////  发起请求  /////////
+  static request(ali_object) {
+    const ali_url = ali_object.url
+    const ali_headers = ali_object.headers
+    const ali_method = ali_object.method || "GET"
+    const ali_data = ali_object.data
+    const ali_timeout = ali_object.timeout || 30000
+    const ali_dataType = ali_object.dataType || "JSON"
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      const url = ali_url
+      const header = ali_headers
+      const method = ali_method
+      const data = ali_data
+      const timeout = ali_timeout
+      const dataType = ali_dataType
+      uni.request({
+        url,
+        header,
+        method,
+        data,
+        timeout,
+        dataType,
+        success: uni_res =>{ 
+          const ali_res = {
+            data: uni_res.data,
+            statusCode: uni_res.statusCode,
+            headers: uni_res.header,
+            cookies: uni_res.cookies,
+          }
+          SUCCESS(ali_res)
+        }
+      })
+      
+    },ali_success,ali_fail,ali_complete)
+  }
 
-  
+  ////////  上传、下载  /////////
+  static downloadFile(ali_object) {
+		const ali_url = ali_object.url
+    const ali_header = ali_object.header
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      const url = ali_url
+      const header = ali_header
+      uni.downloadFile({
+        url,
+        header,
+        success: uni_res =>{ 
+          const ali_res = {
+            apFilePath: uni_res.tempFilePath,
+            statusCode: uni_res.statusCode, 
+          }
+          SUCCESS(ali_res)
+        }
+      })
+      
+    },ali_success,ali_fail,ali_complete)
+  }
 
-  
+  static uploadFile(ali_object) {
+		const ali_url = ali_object.url
+    const ali_filePath = ali_object.filePath
+    const ali_fileName = ali_object.fileName
+    const ali_fileType = ali_object.fileType
+    const ali_header = ali_object.header
+    const ali_formData = ali_object.formData
+		const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      const url = ali_url
+      const header = ali_header
+      const filePath = ali_filePath
+      const fileType = ali_fileType
+      const name = ali_fileName
+      const formData = ali_formData
+      uni.uploadFile({
+        url,
+        header,
+        filePath,
+        fileType,
+        name,
+        formData,
+        success: uni_res =>{ 
+          const ali_res = {
+            statusCode: uni_res.statusCode,
+            data: uni_res.data, 
+            header:{}
+          }
+          SUCCESS(ali_res)
+        }
+      })
+      
+    },ali_success,ali_fail,ali_complete)
+  }
 
- 
-  
 
-  
-  
-
-
-
-	
-
-	
-
-	
-
-	
-	
-
-	
-	
-	
-
-	
-	
-
-	
-	
-
-
-
-	
-
-	
-  
-
-
-	
 
 	
 
