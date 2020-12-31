@@ -1317,7 +1317,6 @@ export default class my {
 
   static onBluetoothDeviceFound (callback) {
     uni.onBluetoothDeviceFound (uni_res =>{
-
       const ali_devices = uni_res.devices.map(device =>{ 
         return {
           name: device.name,
@@ -1339,6 +1338,76 @@ export default class my {
 
   static stopBluetoothDevicesDiscovery (ali_object) {
     return uni.stopBluetoothDevicesDiscovery (ali_object)	
+  }
+
+  static onBluetoothAdapterStateChange (callback) {
+    return uni.onBluetoothAdapterStateChange (callback)	
+  }
+
+  static getConnectedBluetoothDevices (ali_object) {
+    const ali_deviceId = ali_object.deviceId
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    const services = [ali_deviceId]
+    const success = ali_success
+    const fail = ali_fail
+    const complete = ali_complete
+    const uni_object = {
+      services,
+      success,
+      fail,
+      complete
+    }
+    return uni.getConnectedBluetoothDevices (uni_object)	
+  }
+
+  static getBluetoothDevices (ali_object) {
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      uni.getBluetoothDevices ({
+        success:uni_res =>{
+        const ali_devices = uni_res.devices.map(device =>{ 
+          return {
+            name: device.name,
+            deviceName: device.name,
+            deviceId: device.deviceId,
+            localName: device.localName,
+            RSSI: device.RSSI,
+            manufacturerData: device.advertisData,
+            advertisServiceUUIDs: device.advertisServiceUUIDs,
+            serviceData: device.serviceData
+          }
+        })
+        const ali_res = {
+          devices: ali_devices
+        }
+        SUCCESS(ali_res)
+      }
+      })	
+
+    },ali_success,ali_fail,ali_complete)
+    
+  }
+
+  static getBluetoothAdapterState (ali_object) {
+    return uni.getBluetoothAdapterState(ali_object)
+  }
+
+  static closeBluetoothAdapter (ali_object) {
+    return uni.closeBluetoothAdapter(ali_object)
+  }
+
+  static offBluetoothAdapterStateChange (callback) {
+    return console.log("offBluetoothAdapterStateChange暂不支持")	
+  }
+
+  static offBluetoothDeviceFound (callback) {
+    return console.log("getBatteryInfoSync暂不支持")	
   }
 
   ////////  低功耗蓝牙  /////////
