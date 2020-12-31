@@ -1204,7 +1204,7 @@ export default class my {
               record: uni_res.authSetting['scope.record'],
               invoice: uni_res.authSetting['scope.invoice'],
               invoiceTitle: uni_res.authSetting['scope.invoiceTitle'],
-              _RVA_APPID: null,
+              _RVA_APPID: null
             }
           }
           SUCCESS(ali_res)
@@ -1214,6 +1214,138 @@ export default class my {
     },ali_success,ali_fail,ali_complete)
     
   }
+
+  static openSetting(ali_object) {
+    /*const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      uni.openSetting({
+        success: uni_res =>{
+          const ali_res = {
+            authSetting: {
+              location: uni_res.authSetting['scope.userLocation'],
+              album: uni_res.authSetting['scope.writePhotosAlbum'],
+              camera: uni_res.authSetting['scope.camera'],
+              werun: uni_res.authSetting['scope.werun'],
+              address: uni_res.authSetting['scope.address'],
+              userinfo: uni_res.authSetting['scope.userInfo'],
+              userLocationBackground: uni_res.authSetting['scope.userLocationBackground'],
+              record: uni_res.authSetting['scope.record'],
+              invoice: uni_res.authSetting['scope.invoice'],
+              invoiceTitle: uni_res.authSetting['scope.invoiceTitle']
+            }
+          }
+          SUCCESS(ali_res)
+        }
+      })
+
+    },ali_success,ali_fail,ali_complete)*/
+    return console.log("openSetting暂不支持")	
+    
+  }
+
+  ////////  添加手机联系人  /////////
+  static addPhoneContact(ali_object) {
+    return uni.addPhoneContact(ali_object)	
+  }
+
+  ////////  权限引导  /////////
+  static showAuthGuide (ali_object) {
+    return console.log("showAuthGuide暂不支持")
+  }
+
+  ////////  扫码  /////////
+  static scan(ali_object) {
+    const ali_scanType = ali_object.scanType || ['qrCode','barCode']
+    const ali_hideAlbum = ali_object.hideAlbum || false
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    const scanType = ali_scanType
+    const onlyFromCamera = ali_hideAlbum
+    PROMISE((SUCCESS) =>{
+      uni.scanCode({
+        scanType,
+        onlyFromCamera,
+        success: uni_res =>{
+          const ali_res = {
+            code: "code data",
+            qrCode: "qrCode data",
+            barCode: "barCode data",
+            codeContent: uni_res.result,
+            imageChannel: "",
+            rawData: "",
+            charSet:uni_res.charSet,
+            path: uni_res.path
+          }
+          SUCCESS(ali_res)
+        }
+      })
+
+    },ali_success,ali_fail,ali_complete)
+  }
+
+  ////////  内存不足警告  /////////
+  static onMemoryWarning (callback) {
+    return uni.onMemoryWarning (callback)	
+  }
+
+  static offMemoryWarning (callback) {
+    return console.log("offMemoryWarning暂不支持")
+  }
+
+  ////////  获取设备电量  /////////
+  static getBatteryInfo (ali_object) {
+    return console.log("getBatteryInfo暂不支持")	
+  }
+
+  static getBatteryInfoSync (ali_object) {
+    return console.log("getBatteryInfoSync暂不支持")	
+  }
+
+  ////////  传统蓝牙  /////////
+  static openBluetoothAdapter (ali_object) {
+    return uni.openBluetoothAdapter (ali_object)	
+  }
+
+  static startBluetoothDevicesDiscovery (ali_object) {
+    return uni.startBluetoothDevicesDiscovery (ali_object)	
+  }
+
+  static onBluetoothDeviceFound (callback) {
+    uni.onBluetoothDeviceFound (uni_res =>{
+
+      const ali_devices = uni_res.devices.map(device =>{ 
+        return {
+          name: device.name,
+          deviceName: device.name,
+          deviceId: device.deviceId,
+          localName: device.localName,
+          RSSI: device.RSSI,
+          advertisData: device.advertisData,
+          advertisServiceUUIDs: device.advertisServiceUUIDs,
+          serviceData: device.serviceData
+        }
+      })
+      const ali_res = {
+        devices:ali_devices
+      }
+      callback(ali_res)
+    })	
+  }
+
+  static stopBluetoothDevicesDiscovery (ali_object) {
+    return uni.stopBluetoothDevicesDiscovery (ali_object)	
+  }
+
+  ////////  低功耗蓝牙  /////////
+  static connectBLEDevice (ali_object) {
+    return console.log("getBatteryInfoSync暂不支持")	
+  }
+
 
 
 
