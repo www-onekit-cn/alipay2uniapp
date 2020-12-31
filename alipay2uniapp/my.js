@@ -1412,8 +1412,112 @@ export default class my {
 
   ////////  低功耗蓝牙  /////////
   static connectBLEDevice (ali_object) {
-    return console.log("getBatteryInfoSync暂不支持")	
+    return uni.createBLEConnection(ali_object)	
   }
+
+  static disconnectBLEDevice (ali_object) {
+    return uni.closeBLEConnection(ali_object)	
+  }
+
+  static getBLEDeviceCharacteristics (ali_object) {
+    const uni_res = uni.getBLEDeviceCharacteristics(ali_object)	
+    const ali_characteristics = uni_res.characteristics.map(characteristic =>{ 
+      return {
+        characteristicId: characteristic.uuid,
+        properties: characteristic.properties,
+        value: "",
+        localName: "",
+      }
+    })
+    const ali_res = {
+      characteristics: ali_characteristics 
+    }
+    return ali_res
+  }
+
+  static getBLEDeviceServices (ali_object) {
+    const uni_res = uni.getBLEDeviceServices(ali_object)	
+    const ali_services = uni_res.services.map(service =>{ 
+      return {
+        serviceId: service.uuid,
+        isPrimary: service.isPrimary,
+      }
+    })
+    const ali_res = {
+      services: ali_services 
+    }
+    return ali_res 
+  }
+
+  static notifyBLECharacteristicValueChange (ali_object) {
+    return uni.notifyBLECharacteristicValueChange(ali_object)	
+  }
+
+  static onBLECharacteristicValueChange (callback) {
+    uni.onBLECharacteristicValueChange(uni_res =>{
+      const ali_res = {
+        deviceId: uni_res.deviceId,
+        serviceId: uni_res.serviceId,
+        characteristicId: uni_res.characteristicId,
+        value: uni_res.value,
+        connected: true
+      }
+      callback(ali_res)
+    })	
+  }
+
+  static onBLEConnectionStateChange (callback) {
+    return uni.onBLEConnectionStateChange(callback)	
+  }
+
+  static readBLECharacteristicValue (ali_object) {
+    const uni_res =  uni.readBLECharacteristicValue(ali_object)	
+    const ali_res = {
+      deviceId: uni_res.deviceId,
+      serviceId: uni_res.serviceId,
+      characteristicId: uni_res.characteristicId,
+      value: uni_res.value,
+    }
+    return ali_res
+  }
+
+  static writeBLECharacteristicValue (ali_object) {
+    const ali_deviceId = ali_object.deviceId
+    const ali_serviceId = ali_object.serviceId
+    const ali_characteristicId = ali_object.characteristicId
+    const ali_value = ali_object.value
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    const deviceId = ali_deviceId
+    const serviceId = ali_serviceId
+    const characteristicId = ali_characteristicId
+    const value = [ali_value]
+    const success = ali_success
+    const fail = ali_fail
+    const complete = ali_complete
+    const uni_object = {
+      deviceId,
+      serviceId,
+      characteristicId,
+      value,
+      success,
+      fail,
+      complete,
+    }
+    return uni.writeBLECharacteristicValue(uni_object)
+  }
+
+  static offBluetoothAdapterStateChange (callback) {
+    return console.log("offBluetoothAdapterStateChange暂不支持")	
+  }
+
+  static offBluetoothDeviceFound (callback) {
+    return console.log("offBluetoothDeviceFound暂不支持")	
+  }
+
+  
 
 
 
