@@ -992,6 +992,229 @@ export default class my {
     },ali_success,ali_fail,ali_complete)
   }
 
+  ////////  webScoket  /////////
+  static connectSocket(ali_object) {
+		return uni.connectSocket(ali_object)
+  }
+
+  static onSocketOpen(callback) {
+		return uni.onSocketOpen(callback)
+  }
+
+  static onSocketError(callback) {
+		return uni.onSocketError(callback)
+  }
+
+  static sendSocketMessage(ali_object) {
+		return uni.sendSocketMessage(ali_object)
+  }
+
+  static onSocketMessage(callback) {
+		return uni.onSocketMessage(callback)
+  }
+
+  static closeSocket(ali_object) {
+		return uni.closeSocket(ali_object)
+  }
+
+  static onSocketClose(callback) {
+		return uni.onSocketClose(callback)
+  }
+
+  static offSocketClose(callback) {
+		return console.log("offSocketClose暂不支持")
+  }
+
+  static offSocketMessage(callback) {
+		return console.log("offSocketMessage暂不支持")
+  }
+
+  static offSocketOpen(ali_object) {
+		return console.log("offSocketOpen暂不支持")
+  }
+
+  static offSocketError(callback) {
+		return console.log("offSocketError暂不支持")
+  }
+
+  //////////////////////  设备  ///////////////////////////
+
+  ////////  系统消息  /////////
+  static getSystemInfo(ali_object) {
+		return uni.getSystemInfo(ali_object)
+  }
+
+  static getSystemInfoSync() {
+		return uni.getSystemInfoSync()
+  }
+
+  ////////  网络状态  /////////
+  static getNetworkType(ali_object) {
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      uni.getNetworkType({
+        success: uni_res =>{
+          const ali_res = {
+            networkType: uni_res.networkType,
+            networkAvailable: true
+          }
+          SUCCESS(ali_res)
+        }
+      })
+    },ali_success,ali_fail,ali_complete)
+		
+  }
+
+  static onNetworkStatusChange(callback) {
+    return uni.onNetworkStatusChange(callback)	
+  }
+
+  static offNetworkStatusChange(callback) {
+    return console.log("offNetworkStatusChange暂不支持")
+  }
+
+  ////////  摇一摇  /////////
+  static watchShake(ali_object) {
+    return console.log("watchShake暂不支持")
+  }
+
+  ////////  震动  /////////
+  static vibrate(ali_object) {
+    return console.log("vibrate暂不支持")	
+  }
+
+  static vibrateLong(ali_object) {
+    return uni.vibrateLong(ali_object)	
+  }
+
+  static vibrateShort(ali_object) {
+    return uni.vibrateShort(ali_object)	
+  }
+
+  ////////  加速度计  /////////
+  static onAccelerometerChange(callback) {
+    return uni.onAccelerometerChange(callback)	
+  }
+
+  static offAccelerometerChange(callback) {
+    return uni.offAccelerometerChange(callback)	
+  }
+
+  ////////  陀螺仪  /////////
+  static onGyroscopeChange(callback) {
+    return uni.onGyroscopeChange(callback)	
+  }
+
+  static offGyroscopeChange(callback) {
+    return console.log("offGyroscopeChange暂不支持")	
+  }
+
+  ////////  罗盘  /////////
+  static onCompassChange(callback) {
+    return uni.onCompassChange(callback)	
+  }
+
+  static offCompassChange(callback) {
+    return uni.offCompassChange(callback)	
+  }
+
+  ////////  拨打电话  /////////
+  static makePhoneCall(ali_object) {
+    return uni.makePhoneCall(ali_object)	
+  }
+
+  ////////  获取服务器时间  /////////
+  static getServerTime(ali_object) {
+    return console.log("getServerTime暂不支持")	
+  }
+
+  ////////  用户截屏事件  /////////
+  static onUserCaptureScreen(callback) {
+    return uni.onUserCaptureScreen(callback)	
+  }
+
+  static offUserCaptureScreen(callback) {
+    return console.log("offUserCaptureScreen暂不支持")	
+  }
+
+  ////////  屏幕亮度  /////////
+  static getScreenBrightness(ali_object) {
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      uni.getScreenBrightness({
+        success: uni_res =>{
+          const ali_res = {
+            brightnes: uni_res.value,
+          }
+          SUCCESS(ali_res)
+        }
+      })
+    },ali_success,ali_fail,ali_complete)
+    
+  }
+
+  static setScreenBrightness(ali_object) {
+    const ali_brightness = ali_object.brightness
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    const value = ali_brightness
+    const success = ali_success
+    const fail = ali_fail
+    const complete = ali_complete
+    const uni_object = {
+      value,
+      success,
+      fail,
+      complete
+    }
+    return uni.setScreenBrightness(uni_object)
+  }
+
+  static setKeepScreenOn(ali_object) {
+    return uni.setKeepScreenOn(ali_object)	
+  }
+
+  ////////  设置  /////////
+  static getSetting(ali_object) {
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      uni.getSetting({
+        success: uni_res =>{
+          const ali_res = {
+            authSetting: {
+              location: uni_res.authSetting['scope.userLocation'],
+              album: uni_res.authSetting['scope.writePhotosAlbum'],
+              camera: uni_res.authSetting['scope.camera'],
+              alipaysports: uni_res.authSetting['scope.werun'],
+              phoneNumber: "000000",
+              aliaddress: uni_res.authSetting['scope.address'],
+              userinfo: uni_res.authSetting['scope.userInfo'],
+              userLocationBackground: uni_res.authSetting['scope.userLocationBackground'],
+              record: uni_res.authSetting['scope.record'],
+              invoice: uni_res.authSetting['scope.invoice'],
+              invoiceTitle: uni_res.authSetting['scope.invoiceTitle'],
+              _RVA_APPID: null,
+            }
+          }
+          SUCCESS(ali_res)
+        }
+      })
+
+    },ali_success,ali_fail,ali_complete)
+    
+  }
+
 
 
 	
