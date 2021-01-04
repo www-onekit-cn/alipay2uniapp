@@ -133,21 +133,23 @@ export default class my {
     const ali_fail = ali_object.fail
     const ali_complete = ali_object.complete
     ali_object = null
+    const title = ali_title
+    const backgroundColor = ali_backgroundColor
+    const frontColor = "#ffffff"
+    const uni_object1 ={ title }
+    const uni_object2 ={ frontColor,backgroundColor }
 
-    PROMISE((SUCCESS) =>{ 
-      const ali_res1 = {
-        title : ali_title
+    PROMISE((SUCCESS) => {
+      uni.setNavigationBarTitle(uni_object1)
+      uni.setNavigationBarColor(uni_object2)
+
+      const result = {
+        errMsg: 'setNavigationBar: ok'
       }
-      const ali_res2 = {
-        backgroundColor : ali_backgroundColor
-      }
-      uni.setNavigationBarTitle(ali_res1)
-      uni.setNavigationBarColor(ali_res2)
-      SUCCESS(ali_res1)
-      SUCCESS(ali_res2)
-      
-    },ali_success, ali_fail, ali_complete)  
-		
+
+      SUCCESS(result)
+    },ali_success,ali_fail,ali_complete)
+    
   }
 
   static hideNavigationBarLoading() {
@@ -299,10 +301,9 @@ export default class my {
       const itemList = ali_items
       uni.showActionSheet({
         itemList,
-        success: res =>{
+        success: uni_res =>{
           const ali_res ={
-            index: res.tapIndex,
-            success: true
+            index: uni_res.tapIndex
           }
           SUCCESS(ali_res)
         }
@@ -1216,7 +1217,7 @@ export default class my {
   }
 
   static openSetting(ali_object) {
-    /*const ali_success = ali_object.success
+    const ali_success = ali_object.success
     const ali_fail = ali_object.fail
     const ali_complete = ali_object.complete
     ali_object = null
@@ -1241,8 +1242,7 @@ export default class my {
         }
       })
 
-    },ali_success,ali_fail,ali_complete)*/
-    return console.log("openSetting暂不支持")	
+    },ali_success,ali_fail,ali_complete)
     
   }
 
@@ -1556,6 +1556,20 @@ export default class my {
     const ali_success = ali_object.success
     ali_object = null
     return uni.onBeaconUpdate (ali_success)
+  }
+
+  //////////////////////  数据安全  ///////////////////////////
+  static getBeacons (ali_object) {
+    console.log("getBeacons暂不支持")	
+  }
+
+  //////////////////////  分享  ///////////////////////////
+  static showSharePanel () {
+    return uni.showShareMenu()
+  }
+
+  static hideShareMenu (ali_object) {
+    return uni.hideShareMenu(ali_object)
   }
 
   
