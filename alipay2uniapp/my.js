@@ -1517,6 +1517,47 @@ export default class my {
     return console.log("offBluetoothDeviceFound暂不支持")	
   }
 
+  ////////  iBeacon  /////////
+  static getBeacons (ali_object) {
+    const ali_success = ali_object.success
+    const ali_fail = ali_object.fail
+    const ali_complete = ali_object.complete
+    ali_object = null
+    PROMISE((SUCCESS) =>{
+      uni.getBeacons({
+        success: uni_res =>{
+          const ali_res = {
+            beacons: uni_res.beacons,
+            errCode: "0",
+            errorMsg: "ok"
+          }
+          SUCCESS(ali_res)
+        }
+      })
+
+    },ali_success,ali_fail,ali_complete)
+  }
+
+  static startBeaconDiscovery (ali_object) {
+    return uni.startBeaconDiscovery (ali_object)
+  }
+
+  static stopBeaconDiscovery (ali_object) {
+    return uni.stopBeaconDiscovery (ali_object)
+  }
+
+  static onBeaconServiceChange (ali_object) {
+    const ali_success = ali_object.success
+    ali_object = null
+    return uni.onBeaconServiceChange (ali_success)
+  }
+
+  static onBeaconUpdate (ali_object) {
+    const ali_success = ali_object.success
+    ali_object = null
+    return uni.onBeaconUpdate (ali_success)
+  }
+
   
 
 
