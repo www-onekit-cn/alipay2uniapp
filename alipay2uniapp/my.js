@@ -20,7 +20,7 @@ export default class my {
   }
   
   static getLaunchOptionsSync() {
-		return console.error("TO DO ... WANGYEWEI")
+		return console.warn("TO DO ... WANGYEWEI")
   }
   
   static getRunScene(ali_object) {
@@ -78,7 +78,7 @@ export default class my {
   }
   
   static offComponentError(callback) {
-		return console.error("offComponentError暂不支持")
+		return console.warn("offComponentError暂不支持")
   }
   
   static offError(callback) {
@@ -86,7 +86,7 @@ export default class my {
   }
   
   static offUnhandledRejection(callback) {
-		return console.error("offUnhandledRejection暂不支持")
+		return console.warn("offUnhandledRejection暂不支持")
   }
   
   static onAppHide(callback) {
@@ -104,7 +104,7 @@ export default class my {
   }
   
   static onComponentError(callback) {
-		return console.error("onComponentError暂不支持")
+		return console.warn("onComponentError暂不支持")
   }
 
   static onError(callback) {
@@ -112,14 +112,14 @@ export default class my {
   }
   
   static onUnhandledRejection(callback) {
-		return console.error("onUnhandledRejection暂不支持")
+		return console.warn("onUnhandledRejection暂不支持")
   }
 
   //////////////////////  界面  ///////////////////////////
 
   /////// 导航栏 /////
   static getTitleColor(ali_object) {
-		return console.error("getTitleColor暂不支持")
+		return console.warn("getTitleColor暂不支持")
   }
 
   static hideBackHome() {
@@ -369,37 +369,37 @@ export default class my {
   
   ////////  联系人  /////////
   static chooseAlipayContact(object) {
-		return console.error("chooseAlipayContact暂不支持")
+		return console.warn("chooseAlipayContact暂不支持")
   }
 
   static chooseContact(object) {
-		return console.error("chooseContactt暂不支持")
+		return console.warn("chooseContactt暂不支持")
   }
 
   static choosePhoneContact(object) {
-		return console.error("choosePhoneContact暂不支持")
+		return console.warn("choosePhoneContact暂不支持")
   }
 
   ////////  选择城市  /////////
   static chooseCity(object) {
-		return console.error("chooseCity暂不支持")
+		return console.warn("chooseCity暂不支持")
   }
 
   static onLocatedComplete(object) {
-		return console.error("onLocatedComplete暂不支持")
+		return console.warn("onLocatedComplete暂不支持")
   }
 
   static setLocatedCity(object) {
-		return console.error("setLocatedCity暂不支持")
+		return console.warn("setLocatedCity暂不支持")
   }
 
   static regionPicker(object) {
-		return console.error("regionPicker暂不支持")
+		return console.warn("regionPicker暂不支持")
   }
 
   ////////  选择日期  /////////
   static datePicker(object) {
-		return console.error("datePicker暂不支持")
+		return console.warn("datePicker暂不支持")
   }
 
   ////////  动画  /////////
@@ -424,12 +424,12 @@ export default class my {
   }
 
   static getMapInfo(object) {
-		return console.error("getMapInfo暂不支持")
+		return console.warn("getMapInfo暂不支持")
   }
 
   ////////  计算路径  /////////
   static calculateRoute(object) {
-		return console.error("calculateRoute暂不支持")
+		return console.warn("calculateRoute暂不支持")
   }
 
   ////////  键盘  /////////
@@ -475,12 +475,12 @@ export default class my {
 
   ////////  选项选择器  /////////
   static optionsSelect(ali_object) {
-    return console.error("optionsSelect暂不支持")
+    return console.warn("optionsSelect暂不支持")
   }
 
   ////////  级联选择  /////////
   static optionsSelect(ali_object) {
-    return console.error("multiLevelSelect暂不支持")
+    return console.warn("multiLevelSelect暂不支持")
   }
 
   ////////  设置窗口背景  /////////
