@@ -1,5 +1,6 @@
+import Db from './Db'
 export default class serverless {
   static get db () {
-    return uniCloud.database()
+    return new Db(uniCloud.database())
   }
 }
