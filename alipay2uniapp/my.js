@@ -1,5 +1,6 @@
 import PROMISE from '../node_modules/oneutil/PROMISE'
 import TASK from '../node_modules/oneutil/TASK'
+import serverless from './serverless/serverless'
 
 // import TheKit from './tools/TheKit'
 export default class my {
@@ -1574,7 +1575,11 @@ export default class my {
 
   
 
+  ////////////////////////// serverless ///////////////////////////
 
+  static get serverless() {
+    return serverless
+  }
 
 
 	
