@@ -1,12 +1,12 @@
 <template>
-  <div class="page">
+  <div class="onekit-page">
     <slot />
   </div>
 </template>
 
 <script>
 export default {
-  name: "page",
+  name: "onekit-page",
 };
 </script>
 
