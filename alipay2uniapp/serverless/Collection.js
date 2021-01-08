@@ -4,7 +4,6 @@ export default class Collection {
   }
 
   insertOne(data) {
-    // return this.THIS.add(data)
     return new Promise((resolve, reject) => {
       this.THIS.add(data).then(res => {
         const result = {
@@ -16,7 +15,7 @@ export default class Collection {
           },
           success: true
         }
-        resolve(result)
+         resolve(result)
       }).catch(err => {
         reject(err)
       })
@@ -41,9 +40,9 @@ export default class Collection {
   deleteOne(filter) {
     return new Promise((resolve, reject) => {
       this.THIS.where(filter)
-        .remove(
-          {getOne: true}
-        )
+        .remove({
+          getOne: true
+        })
         .then(res => {
           const result = {
             affectedDocs: 0,
@@ -53,6 +52,23 @@ export default class Collection {
             },
             success: true
           }
+          resolve(result)
+        })
+        .catch(err => {
+          reject(err)
+        })
+    })
+  }
+
+  deleteMany(filter) {
+    return new Promise((resolve, reject) => {
+      this.THIS.where(filter)
+        .remove()
+        .then(res => {
+          const result = {
+
+          }
+
           resolve(result)
         })
         .catch(err => {
