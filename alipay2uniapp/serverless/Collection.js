@@ -1,3 +1,4 @@
+
 export default class Collection {
   constructor(uni_tabel) {
     this.THIS = uni_tabel
@@ -15,7 +16,7 @@ export default class Collection {
           },
           success: true
         }
-         resolve(result)
+        resolve(result)
       }).catch(err => {
         reject(err)
       })
@@ -66,7 +67,12 @@ export default class Collection {
         .remove()
         .then(res => {
           const result = {
-
+            affectedDocs: res.result.deleted,
+            result: {
+              ok: res.result.deleted,
+              n: 0
+            },
+            success: true
           }
 
           resolve(result)
@@ -74,6 +80,84 @@ export default class Collection {
         .catch(err => {
           reject(err)
         })
+    })
+  }
+
+  find(query) {
+    return new Promise((resolve, reject) => {
+      this.THIS.where(query).get().then(res => {
+        const result = {
+          affectedDocs: res.result.data.length,
+          result: res.result.data,
+          success: true
+        }
+        resolve(result)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  }
+
+  findOne(query) {
+    return new Promise((resolve, reject) => {
+      this.THIS.where(query).get({
+        getOne: true
+      }).then(res => {
+        const result = {
+          affectedDocs: res.result.data.length,
+          result: res.result.data,
+          success: true
+        }
+        resolve(result)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  }
+
+  updateOne(filter, options) {
+    return new Promise((resolve, reject) => {
+      this.THIS.where(filter)
+        .update(options)
+        .then(res => {
+          const result = {
+            affectedDocs: res.result.affectedDocs,
+            result: {
+              ok: res.result.updated,
+              n: res.result.updated,
+              n: res.result.updated,
+              upserted: null
+            },
+            success: true
+          }
+          resolve(result)
+        }).catch(err => {
+          reject(err)
+        })
+    })
+  }
+
+  updateMany(filter, options) {
+    return new Promise((resolve, reject) => {
+      this.THIS.where(filter)
+      .update(options.$set)
+      .then(res => {
+        const result = {
+          affectedDocs: res.result.affectedDocs,
+          result: {
+            ok: res.result.updated,
+            n: res.result.updated,
+            n: res.result.updated,
+            upserted: null
+          },
+          success: true
+        }
+
+        resolve(result)
+      })
+      .catch(err => {
+        reject(err)
+      })
     })
   }
 }
