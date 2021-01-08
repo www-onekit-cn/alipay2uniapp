@@ -194,7 +194,9 @@ export default class Collection {
 
   findOneAndUpdate(filter, update) {
     return new Promise((resolve, reject) => {
-      this.THIS.where(filter).get({getOne: true}).then(num => {
+      this.THIS.where(filter).get({
+        getOne: true
+      }).then(num => {
         const n = num.result.data.length
         this.THIS.where(num.result.data)
           .update(update.$set)
@@ -217,6 +219,31 @@ export default class Collection {
           })
       })
 
+    })
+  }
+
+  findOneAndReplace(filter, replacement) {
+    return new Promise((resolve, reject) => {
+      this.THIS.where(filter).get({
+        getOne: true
+      }).then(res => {
+        this.THIS.where(res.result.data).get().then(resu => {
+            this.THIS.where(res.result.data).update(replacement)
+            const result = {
+              affectedDocs: resu.result.affectedDocs,
+              result: {
+                ok: 1,
+                value: resu.result.data[0],
+                success: true
+              }
+            }
+            resolve(result)
+          })
+          .catch(err => {
+            reject(err)
+          })
+
+      })
     })
   }
 }
