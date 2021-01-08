@@ -79,7 +79,7 @@ export default class my {
   }
   
   static offComponentError(callback) {
-		return console.warn("offComponentError暂不支持")
+		return console.warn("offComponentError is not support")
   }
   
   static offError(callback) {
@@ -87,7 +87,7 @@ export default class my {
   }
   
   static offUnhandledRejection(callback) {
-		return console.warn("offUnhandledRejection暂不支持")
+		return console.warn("offUnhandledRejection is not support")
   }
   
   static onAppHide(callback) {
@@ -105,7 +105,7 @@ export default class my {
   }
   
   static onComponentError(callback) {
-		return console.warn("onComponentError暂不支持")
+		return console.warn("onComponentError is not support")
   }
 
   static onError(callback) {
@@ -113,14 +113,14 @@ export default class my {
   }
   
   static onUnhandledRejection(callback) {
-		return console.warn("onUnhandledRejection暂不支持")
+		return console.warn("onUnhandledRejection is not support")
   }
 
   //////////////////////  界面  ///////////////////////////
 
   /////// 导航栏 /////
   static getTitleColor(ali_object) {
-		return console.warn("getTitleColor暂不支持")
+		return console.warn("getTitleColor is not support")
   }
 
   static hideBackHome() {
@@ -289,7 +289,7 @@ export default class my {
   }
 
   static prompt(ali_object) {
-		return console.log("prompt暂不支持")
+		return console.warn("prompt is not support")
   }
   
   static showActionSheet(ali_object) {
@@ -370,37 +370,37 @@ export default class my {
   
   ////////  联系人  /////////
   static chooseAlipayContact(object) {
-		return console.warn("chooseAlipayContact暂不支持")
+		return console.warn("chooseAlipayContact is not support")
   }
 
   static chooseContact(object) {
-		return console.warn("chooseContactt暂不支持")
+		return console.warn("chooseContactt is not support")
   }
 
   static choosePhoneContact(object) {
-		return console.warn("choosePhoneContact暂不支持")
+		return console.warn("choosePhoneContact is not support")
   }
 
   ////////  选择城市  /////////
   static chooseCity(object) {
-		return console.warn("chooseCity暂不支持")
+		return console.warn("chooseCity is not support")
   }
 
   static onLocatedComplete(object) {
-		return console.warn("onLocatedComplete暂不支持")
+		return console.warn("onLocatedComplete is not support")
   }
 
   static setLocatedCity(object) {
-		return console.warn("setLocatedCity暂不支持")
+		return console.warn("setLocatedCity is not support")
   }
 
   static regionPicker(object) {
-		return console.warn("regionPicker暂不支持")
+		return console.warn("regionPicker is not support")
   }
 
   ////////  选择日期  /////////
   static datePicker(object) {
-		return console.warn("datePicker暂不支持")
+		return console.warn("datePicker is not support")
   }
 
   ////////  动画  /////////
@@ -425,12 +425,12 @@ export default class my {
   }
 
   static getMapInfo(object) {
-		return console.warn("getMapInfo暂不支持")
+		return console.warn("getMapInfo is not support")
   }
 
   ////////  计算路径  /////////
   static calculateRoute(object) {
-		return console.warn("calculateRoute暂不支持")
+		return console.warn("calculateRoute is not support")
   }
 
   ////////  键盘  /////////
@@ -476,12 +476,12 @@ export default class my {
 
   ////////  选项选择器  /////////
   static optionsSelect(ali_object) {
-    return console.warn("optionsSelect暂不支持")
+    return console.warn("optionsSelect is not support")
   }
 
   ////////  级联选择  /////////
   static optionsSelect(ali_object) {
-    return console.warn("multiLevelSelect暂不支持")
+    return console.warn("multiLevelSelect is not support")
   }
 
   ////////  设置窗口背景  /////////
@@ -517,7 +517,7 @@ export default class my {
 
   ////////  设置页面是否支持下拉  /////////
   static setCanPullDown(ali_object) {
-    return coonsole.error("setCanPullDown暂不支持")
+    return coonsole.error("setCanPullDown is not support")
   }
 
   ////////  字体  /////////
@@ -629,7 +629,7 @@ export default class my {
   }
 
   static getAvailableAudioSources(ali_object) {
-    return console.log("getAvailableAudioSources暂不支持")
+    return console.warn("getAvailableAudioSources is not support")
   }
 
   static getBackgroundAudioManager() {
@@ -637,19 +637,19 @@ export default class my {
   }
 
   static offAudioInterruptionBegin(ali_object) {
-    return console.log("offAudioInterruptionBegin暂不支持")
+    return console.warn("offAudioInterruptionBegin is not support")
   }
 
   static offAudioInterruptionEnd(ali_object) {
-    return console.log("offAudioInterruptionEnd暂不支持")
+    return console.warn("offAudioInterruptionEnd is not support")
   }
 
   static onAudioInterruptionBegin(ali_object) {
-    return console.log("onAudioInterruptionBegin暂不支持")
+    return console.warn("onAudioInterruptionBegin is not support")
   }
 
   static onAudioInterruptionEnd(ali_object) {
-    return console.log("onAudioInterruptionEnd暂不支持")
+    return console.warn("onAudioInterruptionEnd is not support")
   }
 
   //////////////////////  缓存  ///////////////////////////
@@ -1024,19 +1024,19 @@ export default class my {
   }
 
   static offSocketClose(callback) {
-		return console.log("offSocketClose暂不支持")
+		return console.warn("offSocketClose is not support")
   }
 
   static offSocketMessage(callback) {
-		return console.log("offSocketMessage暂不支持")
+		return console.warn("offSocketMessage is not support")
   }
 
   static offSocketOpen(ali_object) {
-		return console.log("offSocketOpen暂不支持")
+		return console.warn("offSocketOpen is not support")
   }
 
   static offSocketError(callback) {
-		return console.log("offSocketError暂不支持")
+		return console.warn("offSocketError is not support")
   }
 
   //////////////////////  设备  ///////////////////////////
@@ -1075,17 +1075,17 @@ export default class my {
   }
 
   static offNetworkStatusChange(callback) {
-    return console.log("offNetworkStatusChange暂不支持")
+    return console.warn("offNetworkStatusChange is not support")
   }
 
   ////////  摇一摇  /////////
   static watchShake(ali_object) {
-    return console.log("watchShake暂不支持")
+    return console.warn("watchShake is not support")
   }
 
   ////////  震动  /////////
   static vibrate(ali_object) {
-    return console.log("vibrate暂不支持")	
+    return console.warn("vibrate is not support")	
   }
 
   static vibrateLong(ali_object) {
@@ -1111,7 +1111,7 @@ export default class my {
   }
 
   static offGyroscopeChange(callback) {
-    return console.log("offGyroscopeChange暂不支持")	
+    return console.warn("offGyroscopeChange is not support")	
   }
 
   ////////  罗盘  /////////
@@ -1130,7 +1130,7 @@ export default class my {
 
   ////////  获取服务器时间  /////////
   static getServerTime(ali_object) {
-    return console.log("getServerTime暂不支持")	
+    return console.warn("getServerTime is not support")	
   }
 
   ////////  用户截屏事件  /////////
@@ -1139,7 +1139,7 @@ export default class my {
   }
 
   static offUserCaptureScreen(callback) {
-    return console.log("offUserCaptureScreen暂不支持")	
+    return console.warn("offUserCaptureScreen is not support")	
   }
 
   ////////  屏幕亮度  /////////
@@ -1254,7 +1254,7 @@ export default class my {
 
   ////////  权限引导  /////////
   static showAuthGuide (ali_object) {
-    return console.log("showAuthGuide暂不支持")
+    return console.warn("showAuthGuide is not support")
   }
 
   ////////  扫码  /////////
@@ -1295,16 +1295,16 @@ export default class my {
   }
 
   static offMemoryWarning (callback) {
-    return console.log("offMemoryWarning暂不支持")
+    return console.warn("offMemoryWarning is not support")
   }
 
   ////////  获取设备电量  /////////
   static getBatteryInfo (ali_object) {
-    return console.log("getBatteryInfo暂不支持")	
+    return console.warn("getBatteryInfo is not support")	
   }
 
   static getBatteryInfoSync (ali_object) {
-    return console.log("getBatteryInfoSync暂不支持")	
+    return console.warn("getBatteryInfoSync is not support")	
   }
 
   ////////  传统蓝牙  /////////
@@ -1404,11 +1404,11 @@ export default class my {
   }
 
   static offBluetoothAdapterStateChange (callback) {
-    return console.log("offBluetoothAdapterStateChange暂不支持")	
+    return console.warn("offBluetoothAdapterStateChange is not support")	
   }
 
   static offBluetoothDeviceFound (callback) {
-    return console.log("getBatteryInfoSync暂不支持")	
+    return console.warn("getBatteryInfoSync is not support")	
   }
 
   ////////  低功耗蓝牙  /////////
@@ -1511,11 +1511,11 @@ export default class my {
   }
 
   static offBluetoothAdapterStateChange (callback) {
-    return console.log("offBluetoothAdapterStateChange暂不支持")	
+    return console.warn("offBluetoothAdapterStateChange is not support")	
   }
 
   static offBluetoothDeviceFound (callback) {
-    return console.log("offBluetoothDeviceFound暂不支持")	
+    return console.warn("offBluetoothDeviceFound is not support")	
   }
 
   ////////  iBeacon  /////////
@@ -1561,7 +1561,7 @@ export default class my {
 
   //////////////////////  数据安全  ///////////////////////////
   static getBeacons (ali_object) {
-    console.log("getBeacons暂不支持")	
+    console.warn("getBeacons is not support")	
   }
 
   //////////////////////  分享  ///////////////////////////
