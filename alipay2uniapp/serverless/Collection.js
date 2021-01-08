@@ -227,23 +227,27 @@ export default class Collection {
       this.THIS.where(filter).get({
         getOne: true
       }).then(res => {
-        this.THIS.where(res.result.data).get().then(resu => {
-            this.THIS.where(res.result.data).update(replacement)
-            const result = {
-              affectedDocs: resu.result.affectedDocs,
-              result: {
-                ok: 1,
-                value: resu.result.data[0],
-                success: true
-              }
-            }
-            resolve(result)
+
+            this.THIS.where(res.result.data).update(replacement).then(() => {
+              this.THIS.where(replacement).get().then(resu => {
+                const result = {
+                  affectedDocs: resu.result.affectedDocs,
+                  result: {
+                    ok: 1,
+                    value: resu.result.data[0]
+                  },
+                  success: true
+                }
+                resolve(result)
+            }).catch(err => {
+              reject(err)
+            })
+            
           })
-          .catch(err => {
-            reject(err)
-          })
+          
 
       })
     })
   }
+
 }
