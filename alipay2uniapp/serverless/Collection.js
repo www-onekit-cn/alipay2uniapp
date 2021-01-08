@@ -117,37 +117,41 @@ export default class Collection {
 
   updateOne(filter, options) {
     return new Promise((resolve, reject) => {
-      this.THIS.where(filter)
-        .update(options)
-        .then(res => {
-          const result = {
-            affectedDocs: res.result.affectedDocs,
-            result: {
-              ok: res.result.updated,
-              n: res.result.updated,
-              n: res.result.updated,
-              upserted: null
-            },
-            success: true
-          }
-          resolve(result)
-        }).catch(err => {
-          reject(err)
-        })
+      this.THIS.where(filter).get({getOne: true}).then(res => {
+        this.THIS.where(res.result.data).update(options.$set)
+           .then(resu => {
+            const result = {
+              affectedDocs: resu.result.affectedDocs,
+              result: {
+                ok: resu.result.updated,
+                n: resu.result.updated,
+                n: resu.result.updated,
+                upserted: null
+              },
+              success: true
+            }
+            resolve(result)
+           }).catch(err => {
+             reject(err)
+           })
+      })
+
     })
   }
-
+  
   updateMany(filter, options) {
     return new Promise((resolve, reject) => {
-      this.THIS.where(filter)
+      this.THIS.where(filter).get().then(num => {
+        const n = num.result.data.length
+        this.THIS.where(filter)
       .update(options.$set)
       .then(res => {
         const result = {
           affectedDocs: res.result.affectedDocs,
           result: {
-            ok: res.result.updated,
-            n: res.result.updated,
-            n: res.result.updated,
+            ok: 1,
+            nModified: res.result.updated,
+            n,
             upserted: null
           },
           success: true
@@ -158,6 +162,8 @@ export default class Collection {
       .catch(err => {
         reject(err)
       })
+      })
+      
     })
   }
 }
