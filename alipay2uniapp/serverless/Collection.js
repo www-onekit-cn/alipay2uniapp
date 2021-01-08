@@ -114,12 +114,12 @@ export default class Collection {
     })
   }
 
-  updateOne(filter, options) {
+  updateOne() {
     return new Promise((resolve, reject) => {
-      this.THIS.where(filter).get({
+      this.THIS.where(arguments[0]).get({
         getOne: true
       }).then(res => {
-        this.THIS.where(res.result.data).update(options.$set)
+        this.THIS.where(res.result.data).update(arguments[1].$set)
           .then(resu => {
             const result = {
               affectedDocs: resu.result.affectedDocs,
@@ -136,16 +136,15 @@ export default class Collection {
             reject(err)
           })
       })
-
     })
   }
 
-  updateMany(filter, options) {
+  updateMany() {
     return new Promise((resolve, reject) => {
-      this.THIS.where(filter).get().then(num => {
+      this.THIS.where(arguments[0]).get().then(num => {
         const n = num.result.data.length
-        this.THIS.where(filter)
-          .update(options.$set)
+        this.THIS.where(arguments[0])
+          .update(arguments[1].$set)
           .then(res => {
             const result = {
               affectedDocs: res.result.affectedDocs,
@@ -168,12 +167,12 @@ export default class Collection {
     })
   }
 
-  replaceOne(filter, doc) {
+  replaceOne() {
     return new Promise((resolve, reject) => {
-      this.THIS.where(filter).get({
+      this.THIS.where(arguments[0]).get({
         getOne: true
       }).then(res => {
-        this.THIS.where(res.result.data).update(doc).then(resu => {
+        this.THIS.where(res.result.data).update(arguments[1]).then(resu => {
           const result = {
             affectedDocs: resu.result.affectedDocs,
             result: {
@@ -192,14 +191,14 @@ export default class Collection {
     })
   }
 
-  findOneAndUpdate(filter, update) {
+  findOneAndUpdate() {
     return new Promise((resolve, reject) => {
-      this.THIS.where(filter).get({
+      this.THIS.where(argumentsp0).get({
         getOne: true
       }).then(num => {
         const n = num.result.data.length
         this.THIS.where(num.result.data)
-          .update(update.$set)
+          .update(arguments[1].$set)
           .then(res => {
             const result = {
               affectedDocs: res.result.affectedDocs,
@@ -222,30 +221,47 @@ export default class Collection {
     })
   }
 
-  findOneAndReplace(filter, replacement) {
+  findOneAndReplace() {
     return new Promise((resolve, reject) => {
-      this.THIS.where(filter).get({
+      this.THIS.where(arguments[0]).get({
         getOne: true
       }).then(res => {
-
-            this.THIS.where(res.result.data).update(replacement).then(() => {
-              this.THIS.where(replacement).get().then(resu => {
-                const result = {
-                  affectedDocs: resu.result.affectedDocs,
-                  result: {
-                    ok: 1,
-                    value: resu.result.data[0]
-                  },
-                  success: true
-                }
-                resolve(result)
-            }).catch(err => {
-              reject(err)
-            })
-            
+        this.THIS.where(res.result.data).update(arguments[1]).then(() => {
+          this.THIS.where(arguments[1]).get().then(resu => {
+            const result = {
+              affectedDocs: resu.result.affectedDocs,
+              result: {
+                ok: 1,
+                value: resu.result.data[0]
+              },
+              success: true
+            }
+            resolve(result)
+          }).catch(err => {
+            reject(err)
           })
-          
+        })
+      })
+    })
+  }
 
+  findOneAndDelete() {
+    return new Promise((resolve, reject) => {
+      this.THIS.where(arguments[0]).get({
+        getOne: true
+      }).then(res => {
+        this.THIS.where(res.result.data).remove()
+        const result = {
+          affectedDocs: 1,
+          result: {
+            ok: 1,
+            value: res.result.data
+          },
+          success: true
+        }
+        resolve(result)
+      }).catch(err => {
+        reject(err)
       })
     })
   }
