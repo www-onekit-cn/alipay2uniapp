@@ -1,4 +1,3 @@
-
 export default class Collection {
   constructor(uni_tabel) {
     this.THIS = uni_tabel
@@ -36,6 +35,29 @@ export default class Collection {
       }).catch(err => {
         reject(err)
       })
+    })
+  }
+
+  deleteOne(filter) {
+    return new Promise((resolve, reject) => {
+      this.THIS.where(filter)
+        .remove(
+          {getOne: true}
+        )
+        .then(res => {
+          const result = {
+            affectedDocs: 0,
+            result: {
+              ok: res.result.deleted,
+              n: 0
+            },
+            success: true
+          }
+          resolve(result)
+        })
+        .catch(err => {
+          reject(err)
+        })
     })
   }
 }
