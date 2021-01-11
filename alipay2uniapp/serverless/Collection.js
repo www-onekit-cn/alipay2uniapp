@@ -1,5 +1,5 @@
 export default class Collection {
-  constructor(uni_conllecttion,uni_db) {
+  constructor(uni_conllecttion, uni_db) {
     this.DB = uni_db
     this.THIS = uni_conllecttion
   }
@@ -267,54 +267,76 @@ export default class Collection {
     })
   }
 
- aggregate(my_pipeline) {
-  const _ = this.DB.THIS.command
-   function _match(my_match,uni_aggregate){
-      for(const item_key of Object.keys(my_match)){
-        const item_value = my_match[item_key]
-        if(typeof(item_value)==="Object"){
-          for(const item_value_key of Object.keys(item_value)){
+  aggregate(my_pipeline) {
+    const _ = this.DB.THIS.command
+    let uni_aggregate = this.THIS.aggregate()
+
+    function Aggregate(my_value, uni_aggregate, my_key) {
+      for (const item_key of Object.keys(my_value)) {
+        const item_value = my_value[item_key]
+        if (typeof (item_value) === "Object") {
+          for (const item_value_key of Object.keys(item_value)) {
             const item_value_value = item_value[item_value_key]
             const uni_match = {}
             uni_match[item_key] = _[item_value_key.substr(1)](item_value_value)
-            uni_aggregate = uni_aggregate.match(uni_match)
+            AGG_SWITCH(my_key, uni_match, my_value)
           }
-        }else{
+        } else {
           const uni_match = {}
           uni_match[item_key] = item_value
-          uni_aggregate = uni_aggregate.match(uni_match)
+          AGG_SWITCH(my_key, uni_match, my_value)
         }
       }
       return uni_aggregate
-   }
-   let uni_aggregate = this.THIS.aggregate()
-    for(const my_item of my_pipeline){
-      for(const my_item_key of Object.keys(my_item)){
+    }
+
+    function AGG_SWITCH(key, match, value){
+      console.log(key)
+      console.log(match)
+      console.log(value)
+      switch(key) {
+        case '$match':
+          uni_aggregate = uni_aggregate.match(match)
+          break
+        case '$addFields':
+          uni_aggregate = uni_aggregate.addFields(match)
+          break
+        default: 
+          throw new Error('======aggregate====', value)
+      }
+    }
+
+    for (const my_item of my_pipeline) {
+      for (const my_item_key of Object.keys(my_item)) {
         const my_item_value = my_item[my_item_key]
-        switch(my_item_key){
+        switch (my_item_key) {
           case "$addFields":
-            uni_aggregate = uni_aggregate.addFields()
+            uni_aggregate = Aggregate(my_item_value, uni_aggregate, my_item_key)
             break;
           case "$group":
             uni_aggregate = uni_aggregate.group()
-          break;
+            break;
           case "$match":
-            uni_aggregate = _match(my_item_value,uni_aggregate)
-          break;
-          default:throw new Error("=====aggregate======",my_item_key)
+            uni_aggregate = Aggregate(my_item_value, uni_aggregate, my_item_key)
+            break;
+          default:
+            throw new Error("=====aggregate======", my_item_key)
         }
       }
     }
-    return new Promise((my_resolve,my_reject)=>{
-      uni_aggregate.end().then(uni_res=>{
+
+    return new Promise((my_resolve, my_reject) => {
+      uni_aggregate.end().then(uni_res => {
         const my_res = {
           affectedDocs: uni_res.result.affectedDocs,
           result: uni_res.result.data,
           success: true
         }
         my_resolve(my_res)
-      }).catch(uni_error=>{
-        const my_error = {}
+      }).catch(uni_error => {
+        const my_error = {
+          errMsg: uni_error
+        }
         my_reject(my_error)
       })
     })
