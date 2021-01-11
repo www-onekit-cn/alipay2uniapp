@@ -291,9 +291,6 @@ export default class Collection {
     }
 
     function AGG_SWITCH(key, match, value){
-      console.log(key)
-      console.log(match)
-      console.log(value)
       switch(key) {
         case '$match':
           uni_aggregate = uni_aggregate.match(match)
