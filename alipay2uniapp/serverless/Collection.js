@@ -266,4 +266,9 @@ export default class Collection {
     })
   }
 
+  aggregate([obj, arr]) {
+    arr= null
+    let {$group} = {...obj}
+    return this.THIS.aggregate().group($group).end()
+  }
 }
