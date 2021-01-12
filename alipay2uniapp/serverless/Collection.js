@@ -272,38 +272,19 @@ export default class Collection {
     let uni_aggregate = this.THIS.aggregate()
 
     function Aggregate(my_value, uni_aggregate, my_key) {
-      let uni_match
+      let uni_match = {}
       for (const item_key of Object.keys(my_value)) {
         const item_value = my_value[item_key]
-        if (typeof (item_value) === "Object") {
+        if (typeof (item_value) === 'Object') {
           for (const item_value_key of Object.keys(item_value)) {
             const item_value_value = item_value[item_value_key]
-            uni_match = {}
             uni_match[item_key] = _[item_value_key.substr(1)](item_value_value)
           }
         } else {
-          uni_match = {}
           uni_match[item_key] = item_value
         }
       }
-      uni_aggregate = AGG_SWITCH(my_key, uni_match, my_value, uni_aggregate)
-      return uni_aggregate
-    }
-
-    function AGG_SWITCH(key, match, value, uni_aggregate) {
-      switch (key) {
-        case '$match':
-          uni_aggregate = uni_aggregate.match(match)
-          break
-        case '$addFields':
-          uni_aggregate = uni_aggregate.addFields(match)
-          break
-        case '$bucketAuto':
-          uni_aggregate = uni_aggregate.bucketAuto(match)
-          break
-        default:
-          throw new Error('======aggregate====', value)
-      }
+      uni_aggregate = uni_aggregate[my_key.substr(1)](my_value)
       return uni_aggregate
     }
 
@@ -314,26 +295,7 @@ export default class Collection {
       }
     }
 
-    switch (my_item_key) {
-      case "$addFields":
-        uni_aggregate = Aggregate(my_item_value, uni_aggregate, my_item_key)
-        break
-      case "$bucket":
-        console.warn('Not support $bucket !!!')
-        uni_aggregate = null
-        break
-      case "$bucketAuto":
-        uni_aggregate = Aggregate(my_item_value, uni_aggregate, my_item_key)
-        break
-      case "$group":
-        uni_aggregate = uni_aggregate.group()
-        break;
-      case "$match":
-        uni_aggregate = Aggregate(my_item_value, uni_aggregate, my_item_key)
-        break;
-      default:
-        throw new Error("=====aggregate======", my_item_key)
-    }
+    uni_aggregate = Aggregate(my_item_value, uni_aggregate, my_item_key)
 
     return new Promise((my_resolve, my_reject) => {
       uni_aggregate.end().then(uni_res => {
@@ -349,6 +311,6 @@ export default class Collection {
         }
         my_reject(my_error)
       })
-    }).catch(() => {})
+    })
   }
 }
