@@ -272,18 +272,6 @@ export default class Collection {
     let uni_aggregate = this.THIS.aggregate()
 
     function Aggregate(my_value, uni_aggregate, my_key) {
-      let uni_match = {}
-      for (const item_key of Object.keys(my_value)) {
-        const item_value = my_value[item_key]
-        if (typeof (item_value) === 'Object') {
-          for (const item_value_key of Object.keys(item_value)) {
-            const item_value_value = item_value[item_value_key]
-            uni_match[item_key] = _[item_value_key.substr(1)](item_value_value)
-          }
-        } else {
-          uni_match[item_key] = item_value
-        }
-      }
       uni_aggregate = uni_aggregate[my_key.substr(1)](my_value)
       return uni_aggregate
     }
@@ -310,6 +298,36 @@ export default class Collection {
           errMsg: uni_error
         }
         my_reject(my_error)
+      })
+    })
+  }
+
+  count(my_query) {
+
+    const $ = this.DB.THIS.command
+
+    let my_where_key, my_where_val, my_where_val_val, va_val_left, va_val_right
+
+    my_where_key = Object.keys(my_query)[0]
+    my_where_val = Object.values(my_query)
+    my_where_val_val = Object.values(my_where_val)[0]
+
+    va_val_left = Object.keys(my_where_val_val)[0]
+    va_val_right = Object.values(my_where_val_val)[0]
+
+    return new Promise((wx_resolve, wx_reject) => {
+      this.THIS.where({
+        [my_where_key]: $[va_val_left.substr(1)](va_val_right)
+      }).count().then(uni_res => {
+        const my_res = {
+          affectedDocs: uni_res.result.affectedDocs,
+          result: uni_res.result.total,
+          success: true
+        }
+        wx_resolve(my_res)
+      }).catch(err => {
+        const errMsg = err
+        wx_reject(errMsg)
       })
     })
   }
