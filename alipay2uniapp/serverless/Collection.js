@@ -279,21 +279,21 @@ export default class Collection {
             const item_value_value = item_value[item_value_key]
             const uni_match = {}
             uni_match[item_key] = _[item_value_key.substr(1)](item_value_value)
-            AGG_SWITCH(my_key, uni_match, my_value)
+            uni_aggregate = AGG_SWITCH(my_key, uni_match, my_value)
           }
         } else {
           const uni_match = {}
           uni_match[item_key] = item_value
-          AGG_SWITCH(my_key, uni_match, my_value)
+          uni_aggregate = AGG_SWITCH(my_key, uni_match, my_value, uni_aggregate)
         }
       }
       return uni_aggregate
     }
 
-    function AGG_SWITCH(key, match, value){
-      switch(key) {
+    function AGG_SWITCH(key, match, value, uni_aggregate){
+       switch(key) {
         case '$match':
-          uni_aggregate = uni_aggregate.match(match)
+        uni_aggregate = uni_aggregate.match(match)
           break
         case '$addFields':
           uni_aggregate = uni_aggregate.addFields(match)
@@ -301,6 +301,7 @@ export default class Collection {
         default: 
           throw new Error('======aggregate====', value)
       }
+      return uni_aggregate
     }
 
     for (const my_item of my_pipeline) {
