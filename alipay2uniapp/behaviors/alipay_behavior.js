@@ -1,6 +1,5 @@
-/* eslint-disable no-console */
-/* eslint-disable camelcase */
-module.exports = Behavior({
+/* eslint-disable vue/custom-event-name-casing */
+export default {
 
   properties: {
     animation: {type: Object},
@@ -43,4 +42,4 @@ module.exports = Behavior({
       this.triggerEvent('Touchforcechange')
     },
   },
-})
+}
